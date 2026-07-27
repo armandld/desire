@@ -1,8 +1,17 @@
-# prompts
+# desire
 
 Software engineering prompts inspired by the asymmetric board game Root.
 
-Three roles share one repo and take turns through the day, each with its own information and its
+- **You merge, they don't.** Every rule that matters reduces to this: agents open pull requests,
+  you merge them. Nothing else is consent.
+- **Asynchronous feedback goes on the PR**, you don't need an interactive chat to get stuff done.
+- **Synchronous feedback gets the bigger picture**, every interactive session starts with the plan
+  in mind.
+- **When the rules are wrong, they say so** — an issue here, or a pull request drafted at your
+  ask, which is exactly how this file got written. You merge it: that is what keeps the prompts
+  yours.
+
+Three roles share this repo and take turns through the day, each with its own information and its
 own move:
 
 - 🐦 [Birdsong](BIRDSONG.md) plans, asynchronously, before the day starts
@@ -34,22 +43,24 @@ Then edit the `## Config` block in `AGENTS.md`:
 ```
 - USER          = "<your GitHub login>"
 - REPOS         = ["<owner>/<repo>", ...]   # where the work happens
-- PROMPTS_REPO  = "<owner>/prompts"         # this fork
+- PROMPTS_REPO  = "<owner>/desire"          # this fork
 - MEMORY_REPO   = "<owner>/memory"          # step 3
 - APPROVE_EMOJI = "rocket"
 ```
 
 ### 3. A memory repo, private
 
-Create an empty private repo — `memory` is a fine name. The agents write one file per cycle there,
-`daylight/<date>.md`, and land it as a pull request whose review thread is how you answer them.
-Private matters: it quotes you verbatim and describes work in progress.
+Create an empty private repo — `memory` is a fine name. The agents keep three things there, one
+lifetime each: a turn journal per cycle in `TURNS/<date>.md`, the live board in `README.md`, and
+your standing orders in an append-only `DECREE.md`. Each turn lands as a pull request whose review
+thread is how you answer them. Private matters: it quotes you verbatim and describes work in
+progress.
 
 ### 4. Collaborator on both, and on the work repos
 
-Add the agent account as a collaborator on the prompts repo, the memory repo, and every repo in
-`REPOS`. Write access is enough — nothing in these prompts needs admin, and the rules forbid the
-agents from merging anything anyway: your merge is your consent.
+Add the agent account as a collaborator on this repo, the memory repo, and every repo in `REPOS`.
+Write access is enough — nothing in these prompts needs admin, and the rules forbid the agents from
+merging anything anyway: your merge is your consent.
 
 Keep the default branch protected on all of them. The agents only ever push to their own branches.
 
@@ -59,7 +70,7 @@ Keep the default branch protected on all of them. The agents only ever push to t
 session that has this repo loads all of them up front:
 
 ```shell
-git clone https://github.com/<owner>/prompts && cd prompts && claude
+git clone https://github.com/<owner>/desire && cd desire && claude
 ```
 
 For [Claude Code on the web](https://claude.ai/code) or a scheduled run, add this repo as a source
@@ -82,12 +93,3 @@ at the phase file for the role it plays, or concatenate `AGENTS.md` with one pha
 
 The same goes for any other harness — the files are plain markdown with no tool-specific syntax
 beyond `CLAUDE.md`'s includes.
-
-## Living with it
-
-- **You merge, they don't.** Every rule that matters reduces to this: agents open pull requests,
-  you merge them. Nothing else is consent.
-- **Feedback goes on the pull request**, not into a chat you will lose. The agents read the day
-  file and its comments at the start of every cycle.
-- **When the rules are wrong, they file an issue here** instead of quietly working around them.
-  Prompt changes are yours to make by hand — that is what keeps them prompts and not memory.

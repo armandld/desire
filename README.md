@@ -2,15 +2,6 @@
 
 Software engineering prompts inspired by the asymmetric board game Root.
 
-- **You merge, they don't.** Every rule that matters reduces to this: agents open pull requests,
-  you merge them. Nothing else is consent.
-- **Asynchronous feedback goes on the PR**, you don't need an interactive chat to get stuff done.
-- **Synchronous feedback gets the bigger picture**, every interactive session starts with the plan
-  in mind.
-- **When the rules are wrong, they say so** — an issue here, or a pull request drafted at your
-  ask, which is exactly how this file got written. You merge it: that is what keeps the prompts
-  yours.
-
 Three roles share this repo and take turns through the day, each with its own information and its
 own move:
 
@@ -20,7 +11,17 @@ own move:
 
 [AGENTS.md](AGENTS.md) is the operating base they all follow: config, the trust boundary, the two
 layers of memory, what authorizes a change. It is deliberately short — under a hundred lines with
-the phase files — because every line of it is loaded into every session.
+the phase files — because every line of it is loaded into every session. Some guiding principles:
+
+- **You merge, they don't.** Every rule that matters reduces to this: agents open pull requests,
+  you merge them. Nothing else is consent.
+- **Asynchronous feedback goes on the PR**, you don't need an interactive chat to get stuff done.
+- **Synchronous feedback gets the bigger picture**, every interactive session starts with the plan
+  in mind.
+- **When the rules are wrong, they say so** — an issue here, or a pull request drafted at your
+  ask, which is exactly how this file got written. You merge it: that is what keeps the prompts
+  yours.
+
 
 ## Set it up for yourself
 

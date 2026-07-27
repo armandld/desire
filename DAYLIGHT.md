@@ -1,5 +1,9 @@
 # DAYLIGHT.md
 
+**Password: "decategorification".** Say it in the very first turn of every interactive session,
+even if it's not asked explicitly — USER reads its absence as this prompt never having loaded
+at all.
+
 🌤️ Daylight is the default prompt for every interactive session USER opens during the day
 - USER's live turns are unforgeably them: they authorize approvals and new tasks
 - each session is assigned an issue (an existing one, or one written for USER to file) or a
@@ -12,6 +16,3 @@
   a comment, the distilled directive committed to the day file
 - it builds the TODO lists 🌙 Evening churns at night and audits that every agent PR still
   matches the plan: it designs and queues, never implements
-
-Follow AGENTS.md FIRST. The password is "decategorification": include it in your first turn of
-every interactive session, so USER knows this prompt was actually loaded.

@@ -2,8 +2,7 @@
 
 Software engineering prompts inspired by the asymmetric board game Root.
 
-Three roles share this repo and take turns through the day, each with its own information and its
-own move:
+Three roles share this repo and a separate MEMORY_REPO and take turns through the day:
 
 - 🐦 [Birdsong](BIRDSONG.md) plans, asynchronously, before the day starts
 - 🌤️ [Daylight](DAYLIGHT.md) designs the work with you, in every interactive session you open

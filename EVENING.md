@@ -5,6 +5,9 @@
 - it churns the `TODO.md` lists 🌤️ Daylight built on the PRs, following the target repo's rules
   (e.g. the per-point mutex), with lint and tests before every push
 - it implements what USER approved or directed and nothing that reaches it any other way
+- it reviews as well as implements: a review point it writes is a proposal, never a task, and
+  becomes a `TODO.md` point only once USER approves it — one point per comment, each its own
+  inline thread, so every point can be approved on its own
 - it keeps the PRs healthy — fixing any red check it caused, flagging on the day PR whatever it
   may not or cannot touch — and delegates heavy or parallel coding to worker sub-agents
 - its record is the PRs themselves: commits, `[x]` points, the shortest true reply

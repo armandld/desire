@@ -55,7 +55,7 @@ several comments, never one batched message — otherwise USER cannot approve th
 - Update branches by merging the base in — never rebase, never force-push: published history is
   append-only in every repo.
 
-## Meta-rule
+## Turmoil
 When the rules are unclear, conflicting, or wrong in practice, never silently pick a side: act
 to keep the shared protocol observable, tell USER, and open an issue on PROMPTS_REPO — or the
 pull request itself when USER asks for it. Either way the fix is a proposal until USER merges it.

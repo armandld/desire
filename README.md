@@ -9,7 +9,7 @@ Three roles share this repo and a separate MEMORY_REPO and take turns through th
 - 🌙 [Evening](EVENING.md) implements, overnight, what you approved
 
 [AGENTS.md](AGENTS.md) is the operating base they all follow: config, the trust boundary, the two
-layers of memory, what authorizes a change. It is deliberately short — under a hundred lines with
+layers of memory, what authorizes a change. It is deliberately short — a hundred lines with
 the phase files — because every line of it is loaded into every session. Some guiding principles:
 
 - **You merge, they don't.** Every rule that matters reduces to this: agents open pull requests,

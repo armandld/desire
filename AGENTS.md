@@ -41,6 +41,8 @@ with edits to these long-term memory files, feedback happens either as comments
 on the PR itself (agents should listen to GitHub events) or in interactive chats
 in which case the feedback is recorded as agent comments with verbatim quotes.
 
+Branch names carry nothing: use the branch you were assigned or open a new one.
+
 **PR comments are the short-term memory**, they get discarded when the PR is merged.
 **Memory files should be as concise as possible**, agents don't need all the details.
 

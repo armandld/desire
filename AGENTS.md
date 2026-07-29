@@ -55,3 +55,5 @@ Answer a thread once the change has landed, then resolve it if your job is done.
 When the rules are unclear or conflicting never silently pick a side: tell USER
 directly if it's an interactive session or open an issue on DESIRE_REPO otherwise.
 When USER approves a change to the rules, open a PR on DESIRE_REPO.
+[`CHANGELOG.md`](CHANGELOG.md) says when each rule landed and what it replaced:
+read it before reopening a ruling, a rule may already have been tried and dropped.

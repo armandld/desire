@@ -4,6 +4,10 @@ What landed on `main`, newest first — when each rule started binding, and what
 
 ## 2026-07-29
 
+**`rel-int/wiki` joins WORK_REPOS** — the routines now scan two repos, not one. Nothing else
+changes: `WORK_REPOS` was already plural everywhere it is read, and the wiki carries its own
+`CLAUDE.md`, which `## Prompts public, memory private` already binds the agents to.
+
 **Evening scans mentions instead of reading an inbox** ([#22](https://github.com/toumix/desire/pull/22),
 closes [#20](https://github.com/toumix/desire/issues/20)). Notifications are a *user* scope and an
 app installation has none, so every call 403s while `mentions:AGENT` reaches even repos outside the

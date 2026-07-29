@@ -12,6 +12,10 @@ it is in, so [#21](https://github.com/toumix/desire/issues/21) is three hundred 
 rule and outside it. Two lines proposed here did not survive USER's review — a `## Writing` section
 of its own, and a sentence defining what an issue is.
 
+**`rel-int/wiki` joins WORK_REPOS** — the routines now scan two repos, not one. Nothing else
+changes: `WORK_REPOS` was already plural everywhere it is read, and the wiki carries its own
+`CLAUDE.md`, which `## Prompts public, memory private` already binds the agents to.
+
 **Evening scans mentions instead of reading an inbox** ([#22](https://github.com/toumix/desire/pull/22),
 closes [#20](https://github.com/toumix/desire/issues/20)). Notifications are a *user* scope and an
 app installation has none, so every call 403s while `mentions:AGENT` reaches even repos outside the

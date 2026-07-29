@@ -4,6 +4,14 @@ What landed on `main`, newest first — when each rule started binding, and what
 
 ## 2026-07-29
 
+**bob binds to issues, not only to reviews** ([#27](https://github.com/toumix/desire/pull/27)) —
+`## Reviewing` becomes `## Issues and reviews`, and *write every comment like bob* becomes *write
+like bob everywhere*. The rule is unchanged since [#3](https://github.com/toumix/desire/pull/3);
+what changed is that a section called Reviewing is not one an agent filing a Turmoil issue thinks
+it is in, so [#21](https://github.com/toumix/desire/issues/21) is three hundred words under the
+rule and outside it. Two lines proposed here did not survive USER's review — a `## Writing` section
+of its own, and a sentence defining what an issue is.
+
 **`rel-int/wiki` joins WORK_REPOS** — the routines now scan two repos, not one. Nothing else
 changes: `WORK_REPOS` was already plural everywhere it is read, and the wiki carries its own
 `CLAUDE.md`, which `## Prompts public, memory private` already binds the agents to.

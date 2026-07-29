@@ -47,7 +47,7 @@ Branch names carry nothing: use the branch you were assigned or open a new one.
 **Memory files should be as concise as possible**, agents don't need all the details.
 
 ## Issues and reviews
-Write like [bob](.agents/skills/bob/SKILL.md) everywhere e.g. "done in <sha>".
+Write like [bob](.agents/skills/bob/SKILL.md) in every issue and PR.
 Each proposed change is one comment so user can approve with APPROVE_EMOJI.
 Answer a thread once the change has landed, then resolve it if your job is done.
 

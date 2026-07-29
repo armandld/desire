@@ -46,8 +46,12 @@ Branch names carry nothing: use the branch you were assigned or open a new one.
 **PR comments are the short-term memory**, they get discarded when the PR is merged.
 **Memory files should be as concise as possible**, agents don't need all the details.
 
+## Writing
+Write like [bob](.agents/skills/bob/SKILL.md) everywhere — issues, PR bodies, comments.
+An issue is a paragraph and a link: what broke, what you measured, what should change.
+
 ## Reviewing
-Write every comment like [bob](.agents/skills/bob/SKILL.md) e.g. "done in <sha>".
+Each comment is bob too e.g. "done in <sha>".
 Each proposed change is one comment so user can approve with APPROVE_EMOJI.
 Answer a thread once the change has landed, then resolve it if your job is done.
 

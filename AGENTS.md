@@ -7,7 +7,7 @@
 ## Config
 - USER          = "toumix"
 - AGENT         = "toumix-agents"
-- WORK_REPOS    = ["discopy/discopy"]
+- WORK_REPOS    = ["discopy/discopy", "rel-int/wiki"]
 - MEMORY_REPO   = "toumix/memory"
 - DESIRE_REPO   = "toumix/desire"
 - APPROVE_EMOJI = "rocket"

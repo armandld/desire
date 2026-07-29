@@ -4,6 +4,13 @@ What landed on `main`, newest first — when each rule started binding, and what
 
 ## 2026-07-29
 
+**bob binds to issues, not only to reviews** ([#27](https://github.com/toumix/desire/pull/27)) — the
+voice rule leaves `## Reviewing` for its own `## Writing`, and names issues and PR bodies alongside
+comments. It always read *write every comment like bob*, but a section called Reviewing is not one
+an agent filing a Turmoil issue thinks it is in: [#21](https://github.com/toumix/desire/issues/21)
+is three hundred words under the rule and outside it. Adds the bound the old line never carried —
+an issue is a paragraph and a link.
+
 **Evening scans mentions instead of reading an inbox** ([#22](https://github.com/toumix/desire/pull/22),
 closes [#20](https://github.com/toumix/desire/issues/20)). Notifications are a *user* scope and an
 app installation has none, so every call 403s while `mentions:AGENT` reaches even repos outside the

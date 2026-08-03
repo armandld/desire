@@ -54,6 +54,8 @@ Branch names carry nothing: use the branch you were assigned or open a new one.
 Write like [bob](.agents/skills/bob/SKILL.md) in every issue and PR.
 Each proposed change is one comment so user can approve with APPROVE_EMOJI.
 Answer a thread once the change has landed, then resolve it if your job is done.
+Watch PRs by webhook events only: never schedule timed self check-ins,
+every scheduled fire notifies USER for nothing.
 
 ## Turmoil
 When the rules are unclear or conflicting never silently pick a side: tell USER

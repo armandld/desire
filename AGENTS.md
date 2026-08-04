@@ -40,9 +40,10 @@ MEMORY_REPO holds the agents' long-term memory in its `main` branch:
 - `README.md` is the current state of the work
 - `TURNS/<date>.md` are summaries of daily work
 
-Each role opens a new PR stacked on the previous open PR e.g. `Birdsong <date>`
-with edits to these long-term memory files, feedback happens either as comments
-on the PR itself (agents should listen to GitHub events) or in interactive chats
+Each role pushes its edits to these long-term memory files straight to `main`;
+it opens a PR, e.g. `Birdsong <date>` stacked on the previous open PR, only when
+the changes affect other PRs. Feedback happens either as comments on such a PR
+(agents should listen to GitHub events) or in interactive chats
 in which case the feedback is recorded as agent comments with verbatim quotes.
 
 Branch names carry nothing: use the branch you were assigned or open a new one.

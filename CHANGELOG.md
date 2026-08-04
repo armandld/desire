@@ -2,9 +2,9 @@
 
 What landed on `main`, newest first — when each rule started binding, and what it replaced.
 
-## Unreleased
+## 2026-08-04
 
-**Memory is reserved for cross-workstream changes** — USER's ruling closing
+**Memory is reserved for cross-workstream changes** ([#39](https://github.com/toumix/desire/pull/39)) — USER's ruling closing
 [memory#45](https://github.com/toumix/memory/pull/45), *only open memory PRs when the changes
 affect other PRs*, corrected in-session the same day: *single-workstream turns just record their
 memory in their dedicated PRs, no need for memory*. A turn that stays within one workstream

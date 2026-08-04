@@ -4,13 +4,15 @@ What landed on `main`, newest first — when each rule started binding, and what
 
 ## Unreleased
 
-**Memory PRs are reserved for cross-workstream changes** — USER's ruling closing
-[memory#45](https://github.com/toumix/memory/pull/45): *only open memory PRs when the changes
-affect other PRs*. A turn whose record concerns only its own workstream pushes the day file and
-board straight to memory `main`; the stacked `<Routine> <date>` PR remains for changes that touch
-other PRs, and its review remains the feedback channel. Replaces the unconditional stacked-PR
-rule; supersedes the stacking half of [#30](https://github.com/toumix/desire/issues/30)'s
-question — a chain of single-workstream turns no longer produces a chain of PRs at all.
+**Memory is reserved for cross-workstream changes** — USER's ruling closing
+[memory#45](https://github.com/toumix/memory/pull/45), *only open memory PRs when the changes
+affect other PRs*, corrected in-session the same day: *single-workstream turns just record their
+memory in their dedicated PRs, no need for memory*. A turn that stays within one workstream
+writes nothing to MEMORY_REPO — its work PR is its record; only changes affecting other PRs land
+in memory, by the stacked `<Routine> <date>` PR, whose review remains the feedback channel. The
+board is rewritten by the turns that do land there. Replaces the unconditional stacked-PR rule;
+supersedes the stacking half of [#30](https://github.com/toumix/desire/issues/30)'s question — a
+chain of single-workstream turns no longer produces PRs, or memory, at all.
 
 ## 2026-07-29
 

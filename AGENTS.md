@@ -41,10 +41,12 @@ MEMORY_REPO holds the agents' long-term memory in its `main` branch:
 - `TURNS/<date>.md` are summaries of daily work
 
 A turn that stays within one workstream records itself on its dedicated work PR
-and leaves MEMORY_REPO untouched. Only changes that affect other PRs land there,
-by a PR e.g. `Birdsong <date>` stacked on the previous open PR. Feedback happens
-either as comments on such a PR (agents should listen to GitHub events) or in
-interactive chats, recorded as agent comments with verbatim quotes.
+and leaves MEMORY_REPO untouched. Only changes that affect other PRs land there.
+One memory PR open at a time: if one is already open, push new commits to its
+branch instead of opening another; only open a new one, titled `<Routine> <date>`,
+when none is open. Feedback happens either as comments on that PR (agents should
+listen to GitHub events) or in interactive chats, recorded as agent comments with
+verbatim quotes.
 
 Branch names carry nothing: use the branch you were assigned or open a new one.
 

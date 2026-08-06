@@ -2,6 +2,18 @@
 
 What landed on `main`, newest first — when each rule started binding, and what it replaced.
 
+## 2026-08-06
+
+**One memory PR open at a time, not a stack** ([#43](https://github.com/toumix/desire/pull/43)) —
+USER's ruling on six memory PRs ([memory#42](https://github.com/toumix/memory/pull/42),
+[#43](https://github.com/toumix/memory/pull/43), [#47](https://github.com/toumix/memory/pull/47),
+[#48](https://github.com/toumix/memory/pull/48), [#49](https://github.com/toumix/memory/pull/49),
+[#50](https://github.com/toumix/memory/pull/50)) piling up faster than one human reviews them.
+*Stacked on the previous open PR* required every turn to correctly find and target that one PR; four
+of five turns didn't, branching off `main` instead, and even a correct stack is still N PRs to open,
+review in order and merge. Replaces the stacking clause from the 2026-08-04 entry below: now, if a
+memory PR is open, push to it; only open a new one when none is open.
+
 ## 2026-08-04
 
 **Memory is reserved for cross-workstream changes** ([#39](https://github.com/toumix/desire/pull/39)) — USER's ruling closing

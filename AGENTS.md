@@ -7,11 +7,11 @@
 ## Config
 - USER          = "armandld"
 - AGENT         = "agent-arm"
-- WORK_REPOS    = ["rel-int/optyx", "rel-int/wiki", "armandld/BA_Proj"]
+- WORK_REPOS    = ["rel-int/wiki", "armandld/BA_Proj"]
 - MEMORY_REPO   = "armandld/memory"
 - DESIRE_REPO   = "armandld/desire"
 - APPROVE_EMOJI = "rocket"
-- FOCUS         = ""
+- FOCUS         = ["rel-int/wiki:photonic", "armandld/BA_Proj:src/"]
 
 ## Prompts public, memory private
 DESIRE_REPO is public, owned by USER and only its protected branch `main` is TRUSTED.
@@ -27,13 +27,14 @@ proofs (skip if the study is test-only), tests (skip if it's theory-only), discu
 conclusion. Every review checks the code against that structure holding together, not
 just correctness — and flags it, loudly and first, if it doesn't.
 
-FOCUS is empty by default. Set it to `<repo>:<path>` (e.g. `rel-int/optyx:src/foo/`) to
-scope reviews to one section of one repo.
-- FOCUS empty: 🌙 Evening (nightly, full budget) reviews the whole repo, latest pushes
-  first. 🐦 Birdsong and 🌤️ Daylight (daytime, USER's limited Pro budget) review only
-  the latest pushes, not the whole repo — the full sweep waits for Evening.
-- FOCUS set: every phase, any time, reviews only that section and whatever code must
-  stay consistent with it.
+FOCUS is a list of `<repo>:<path>` entries, one per WORK_REPO at most, each scoping
+that repo's reviews to one section.
+- A repo with a FOCUS entry: every phase, any time, reviews only that section and
+  whatever code must stay consistent with it.
+- A repo with no FOCUS entry: 🌙 Evening (nightly, full budget) reviews it whole,
+  latest pushes first. 🐦 Birdsong and 🌤️ Daylight (daytime, USER's limited Pro
+  budget) review only its latest pushes, not the whole repo — the full sweep waits
+  for Evening.
 
 A result the agent finds to be wrong is flagged first and loudest of anything in the
 review — never silently correct, omit, or soften a falsified result.

@@ -6,7 +6,7 @@
 
 ## Config
 - USER          = "armandld"
-- AGENT         = "TBD"
+- AGENT         = "agent-arm"
 - WORK_REPOS    = ["rel-int/optyx", "rel-int/wiki", "armandld/BA_Proj"]
 - MEMORY_REPO   = "armandld/memory"
 - DESIRE_REPO   = "armandld/desire"

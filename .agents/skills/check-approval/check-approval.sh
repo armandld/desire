@@ -8,7 +8,7 @@
 # Usage: check-approval.sh <owner/repo> <comment-id> [user] [emoji]
 set -euo pipefail
 
-repo="$1" id="$2" user="${3:-toumix}" emoji="${4:-rocket}"
+repo="$1" id="$2" user="${3:-armandld}" emoji="${4:-rocket}"
 
 curl -sS -H "User-Agent: curl" -H "Accept: application/vnd.github+json" \
   "https://api.github.com/repos/$repo/pulls/comments/$id/reactions" \

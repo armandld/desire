@@ -5,11 +5,11 @@
 - 🐦 Birdsong plans before the next day, making sure the pipeline runs smooth
 
 ## Config
-- USER          = "toumix"
-- AGENT         = "toumix-agents"
-- WORK_REPOS    = ["discopy/discopy", "rel-int/wiki"]
-- MEMORY_REPO   = "toumix/memory"
-- DESIRE_REPO   = "toumix/desire"
+- USER          = "armandld"
+- AGENT         = "TBD"  # create a bot account, add as collaborator here and on MEMORY_REPO
+- WORK_REPOS    = ["rel-int/optyx"]
+- MEMORY_REPO   = "armandld/memory"
+- DESIRE_REPO   = "armandld/desire"
 - APPROVE_EMOJI = "rocket"
 
 ## Prompts public, memory private

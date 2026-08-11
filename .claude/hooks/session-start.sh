@@ -29,4 +29,12 @@ fi
 [ -n "${GH_TOKEN:-}${GITHUB_TOKEN:-}" ] || log "note: no GH_TOKEN/GITHUB_TOKEN in env — gh will be unauthenticated"
 
 command -v gh >/dev/null 2>&1 && log "$(gh --version | head -1)" || true
+
+# Cosmetic only: the GitHub API token behind the MCP server still authenticates as
+# armandld, so PR/issue comments, reactions, and "opened by" stay armandld regardless
+# of this. This only makes `git commit` (author/committer) show agent-arm.
+git config --global user.name "agent-arm"
+git config --global user.email "315549631+agent-arm@users.noreply.github.com"
+log "git identity set to agent-arm for commits"
+
 exit 0

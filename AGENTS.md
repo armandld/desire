@@ -101,8 +101,19 @@ not accessible by personal access token`, while its own settings page reads *Thi
 not have access to any repositories* even with "All repositories" selected — that setting only
 covers repos the token's owner owns.
 
-Git commit authorship is unaffected by the proxy — it's local metadata, not an API call — and is
-already set to AGENT for every remote session by the session-start hook.
+**Commits carry AGENT as author, passed per commit — never by `git config`:**
+```
+git commit --author="agent-arm <315549631+agent-arm@users.noreply.github.com>" -m "..."
+```
+Setting `user.name`/`user.email` does not work and must not be attempted. The platform installs
+its own SessionStart hook that re-asserts `Claude <noreply@anthropic.com>` globally and runs
+last — three routine runs each began as `Claude` despite the repo hook setting AGENT. And
+winning would cost the signature: the signing key is registered to `noreply@anthropic.com`, so
+a commit whose COMMITTER is anyone else shows as **Unverified** (`unknown_key`).
+
+`--author` sidesteps both. Git takes attribution from the author and the signature from the
+committer, so the commit reads as AGENT and still verifies. Exported `GIT_AUTHOR_*` variables
+work identically but do not survive between tool calls, so they are not an alternative.
 
 ## Memory
 MEMORY_REPO holds the agents' long-term memory in its `main` branch:

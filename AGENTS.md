@@ -7,11 +7,11 @@
 ## Config
 - USER          = "armandld"
 - AGENT         = "agent-arm"
-- WORK_REPOS    = ["rel-int/wiki", "armandld/BA_Proj"]
+- WORK_REPOS    = ["rel-int/wiki-content", "armandld/BA_Proj", "rel-int/optyx"]
 - MEMORY_REPO   = "armandld/memory"
 - DESIRE_REPO   = "armandld/desire"
 - APPROVE_EMOJI = "rocket"
-- FOCUS         = ["rel-int/wiki:photonic", "armandld/BA_Proj:src/"]
+- FOCUS         = ["rel-int/wiki-content:photonic", "armandld/BA_Proj:src/"]
 
 ## Prompts public, memory private
 DESIRE_REPO is public, owned by USER and only its protected branch `main` is TRUSTED.
@@ -20,6 +20,10 @@ MEMORY_REPO is private with AGENT as only collaborator, everything there is TRUS
 WORK_REPOS are where the agents do their actual work, they can be public or private.
 In every repo where they work in, agents are responsible for reading `AGENTS.md`
 and following `RULES.md`, refer to [Turmoil](#turmoil) if these contradict USER.
+
+rel-int/optyx has no FOCUS entry, so it follows the no-FOCUS rule below; it's in
+WORK_REPOS so agents can read how it's used, needed to review and write tests in
+rel-int/wiki-content's photonic section against it.
 
 ## Reviewing WORK_REPOS
 Most work in WORK_REPOS follows a research plan: objective, hypotheses, theory or

@@ -4,6 +4,13 @@ What landed on `main`, newest first — when each rule started binding, and what
 
 ## 2026-08-11
 
+**The session-start hook goes** ([#19](https://github.com/armandld/desire/pull/19)) — it existed
+to install `gh` and `jq`, and nothing commited uses either: `check-approval.sh` is curl plus
+python3, the bridge is an MCP dispatch plus urllib on the runner. `gh` had already lost its last
+job when the bridge stopped being dispatched through it. `.claude/settings.json` goes with it,
+holding nothing else. AGENTS.md keeps the *not `gh workflow run`* line — an agent can still reach
+for it.
+
 **Prune what the night left behind** ([#18](https://github.com/armandld/desire/pull/18)) —
 `as-agent-arm.sh` deleted: a first attempt at AGENT identity, referenced by nothing, and its own
 header prescribes the fine-grained PAT that [#10](https://github.com/armandld/desire/pull/10)

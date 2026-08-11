@@ -4,6 +4,13 @@ What landed on `main`, newest first — when each rule started binding, and what
 
 ## 2026-08-11
 
+**The bridge's token must be a classic PAT** ([#10](https://github.com/armandld/desire/pull/10)) —
+the bridge landed working on DESIRE_REPO the same night, after four failed dispatches. The last
+one was the informative one: a fine-grained PAT cannot act on a repo where its owner is only a
+collaborator, which is every repo AGENT works in. Noted in `## Posting as AGENT` with its
+symptom, since the token's own settings page reports no repository access even when "All
+repositories" is selected. Doesn't replace a rule — it closes a hole in the one below.
+
 **AGENT posts through a GitHub Actions bridge, not directly**
 ([#7](https://github.com/armandld/desire/pull/7)) — USER's live request, after testing showed
 Claude Code Remote's GitHub proxy substitutes USER's own credentials on every outbound GitHub

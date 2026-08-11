@@ -4,6 +4,11 @@ import sys
 import urllib.error
 import urllib.request
 
+# GitHub tokens never contain whitespace; strip all of it, not just leading/
+# trailing, since a copy-paste can leave a stray character anywhere in the
+# secret and Python's http.client rejects any of it in a header value.
+agent_github_token = "".join(os.environ["AGENT_GITHUB_TOKEN"].split())
+
 payload = json.loads(os.environ["AGENT_REQUEST"])
 allowed = {"agent", "operation", "repo", "number", "title", "body", "head", "base", "reaction"}
 unknown = set(payload) - allowed
@@ -49,7 +54,7 @@ request = urllib.request.Request(
     data=json.dumps(data).encode(),
     method=method,
     headers={
-        "Authorization": "Bearer " + os.environ["AGENT_GITHUB_TOKEN"].strip(),
+        "Authorization": "Bearer " + agent_github_token,
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
         "Content-Type": "application/json",

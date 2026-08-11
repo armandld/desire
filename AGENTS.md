@@ -30,6 +30,13 @@ proofs (skip if the study is test-only), tests (skip if it's theory-only), discu
 conclusion. Every review checks the code against that structure holding together, not
 just correctness — and flags it, loudly and first, if it doesn't.
 
+## Writing in a shared Repo
+An agent pushes only to branches it opened itself. It never pushes to a branch
+carrying someone else's commits, and never to the branch of someone else's PR —
+including USER's.
+Work it wants changed elsewhere becomes a review comment on that PR, or an issue.
+Never a commit.
+
 **Review branches, not the default branch.** A routine clones each repo at its default
 branch, and in a WORK_REPO that branch is the stale one: the live work sits on branches
 that haven't merged yet. Fetch everything and order by recency before reading anything:

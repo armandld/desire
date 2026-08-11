@@ -58,6 +58,28 @@ No GitHub MCP tool returns reaction data, so check with
 [check-approval.sh](.agents/skills/check-approval/check-approval.sh) `<owner/repo> <comment-id>`
 — or a reply from USER on the thread, the other, simpler tell.
 
+## Posting as AGENT
+Cloud sessions can't post to GitHub as AGENT directly: Claude Code Remote's GitHub proxy
+substitutes USER's own connected credentials on every outbound GitHub API call from inside a
+session, regardless of what token a script supplies. Confirmed by testing: the same AGENT PAT
+resolves to AGENT from USER's own terminal, but to USER from inside three different cloud
+environments.
+
+For any GitHub write that must appear as AGENT — issue/PR comment, PR/issue creation, reaction —
+dispatch [`agent-arm-github.yml`](.github/workflows/agent-arm-github.yml) instead of writing
+directly:
+```
+gh workflow run agent-arm-github.yml --ref main \
+  -f request='{"agent":"agent-arm","operation":"comment.create","repo":"OWNER/REPO","number":42,"body":"..."}'
+```
+The dispatch call itself still goes out as USER — that's only the trigger, not the resulting
+object's author. The runner posts with a repo-scoped `AGENT_ARM_GITHUB_TOKEN` secret, unproxied.
+Every repo that needs this needs its own copy of the workflow, script, and secret: the bridge
+refuses any `repo` other than the one it's running in.
+
+Git commit authorship is unaffected by the proxy — it's local metadata, not an API call — and is
+already set to AGENT for every remote session by the session-start hook.
+
 ## Memory
 MEMORY_REPO holds the agents' long-term memory in its `main` branch:
 - `README.md` is the current state of the work

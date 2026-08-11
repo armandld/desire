@@ -4,6 +4,15 @@ What landed on `main`, newest first — when each rule started binding, and what
 
 ## 2026-08-11
 
+**Prune what the night left behind** ([#18](https://github.com/armandld/desire/pull/18)) —
+`as-agent-arm.sh` deleted: a first attempt at AGENT identity, referenced by nothing, and its own
+header prescribes the fine-grained PAT that [#10](https://github.com/armandld/desire/pull/10)
+established cannot work. `## Posting as AGENT` loses a third of its lines to redundancy, the
+forensics staying here where they belong. Two claims corrected rather than trimmed: *a routine's
+`allowed_tools` leaves nothing that can dispatch* is falsified — both routines dispatched with
+that exact list; and *no GitHub MCP tool returns reaction data* was imprecise — MCP returns
+counts, never who reacted, which is why the script stays the sanctioned path.
+
 **Commit attribution moves to `--author`, and out of `git config`**
 ([#17](https://github.com/armandld/desire/pull/17), closes
 [#14](https://github.com/armandld/desire/issues/14)) — the session-start hook set

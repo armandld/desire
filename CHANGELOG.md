@@ -2,6 +2,18 @@
 
 What landed on `main`, newest first — when each rule started binding, and what it replaced.
 
+## 2026-08-11
+
+**AGENT posts through a GitHub Actions bridge, not directly**
+([#7](https://github.com/armandld/desire/pull/7)) — USER's live request, after testing showed
+Claude Code Remote's GitHub proxy substitutes USER's own credentials on every outbound GitHub
+API call from inside a session, regardless of what token a script supplies. The same AGENT PAT
+resolved to AGENT from a local terminal but to USER from three separate cloud environments.
+`## Posting as AGENT` now directs any GitHub write that must appear as AGENT through
+`agent-arm-github.yml`, which runs outside the sandbox with a repo-scoped secret. Doesn't
+replace anything — first rule on this. Git commit authorship was already fixed separately (the
+session-start hook), since it's local metadata, not an API call, and isn't touched by the proxy.
+
 ## 2026-08-06
 
 **One memory PR open at a time, not a stack** ([#43](https://github.com/toumix/desire/pull/43)) —

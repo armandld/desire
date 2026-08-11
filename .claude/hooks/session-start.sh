@@ -30,11 +30,18 @@ fi
 
 command -v gh >/dev/null 2>&1 && log "$(gh --version | head -1)" || true
 
-# Cosmetic only: the GitHub API token behind the MCP server still authenticates as
-# armandld, so PR/issue comments, reactions, and "opened by" stay armandld regardless
-# of this. This only makes `git commit` (author/committer) show agent-arm.
-git config --global user.name "agent-arm"
-git config --global user.email "315549631+agent-arm@users.noreply.github.com"
-log "git identity set to agent-arm for commits"
+# Deliberately NOT setting git user.name / user.email here — see AGENTS.md
+# "Posting as AGENT". Two reasons this hook cannot win that fight and should not try:
+#
+#   1. The platform installs its own SessionStart hook that re-asserts
+#      Claude <noreply@anthropic.com> globally, and its own comment says it exists to
+#      override a project hook that overwrote the identity. It ran last on every
+#      observed session: three routine runs each started as Claude despite this file.
+#   2. Even winning would cost more than it buys. The commit-signing key is registered
+#      to noreply@anthropic.com, so a commit whose COMMITTER is anyone else verifies as
+#      "Unverified" (reason: unknown_key) — measured on this repo's own commits.
+#
+# Attribution is set per commit instead, with --author, which needs no global config
+# and leaves the committer (and the signature) alone.
 
 exit 0

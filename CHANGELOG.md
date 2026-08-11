@@ -4,12 +4,20 @@ What landed on `main`, newest first — when each rule started binding, and what
 
 ## 2026-08-11
 
-**BIRDSONG.md catches up to the one-memory-PR rule**
-([#16](https://github.com/armandld/desire/pull/16)) — the file still said *opens a new PR in its
-MEMORY_REPO*, so a Birdsong run following its own prompt opened exactly the PR the 2026-08-06
-ruling was written to stop. Proposed by Birdsong on [#2](https://github.com/armandld/desire/pull/2)
-at 00:30, re-confirmed by Evening as still real at 05:28, extracted here on its own. Doesn't
-reopen a ruling — it catches a file up to one that landed twelve days earlier.
+**Commit attribution moves to `--author`, and out of `git config`**
+([#17](https://github.com/armandld/desire/pull/17), closes
+[#14](https://github.com/armandld/desire/issues/14)) — the session-start hook set
+`user.name`/`user.email` globally and lost: the platform's own SessionStart hook re-asserts
+`Claude <noreply@anthropic.com>` and runs last, so three routine runs each started as `Claude`
+and had to run the hook by hand. Winning was the wrong goal anyway — measured on this repo's
+commits, an AGENT committer verifies as `unknown_key`, because the signing key belongs to
+`noreply@anthropic.com`. Passing `--author` per commit takes attribution from the author and
+leaves the signature to the committer, so both hold. Replaces the hook's identity block, and
+the *already set to AGENT by the session-start hook* claim that was never true.
+
+Birdsong and Evening had diagnosed this as a persistent session whose SessionStart fires once,
+citing the routine prompt's own wording. That wording is a leftover of the API-created routines;
+an ordinary fresh session reproduced the same symptom, which rules the explanation out.
 
 **Reviews start from the newest branch, not the default one**
 ([#13](https://github.com/armandld/desire/pull/13)) — USER's ruling, minutes before the first

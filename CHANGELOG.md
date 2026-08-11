@@ -4,6 +4,15 @@ What landed on `main`, newest first — when each rule started binding, and what
 
 ## 2026-08-11
 
+**Reviews start from the newest branch, not the default one**
+([#13](https://github.com/armandld/desire/pull/13)) — USER's ruling, minutes before the first
+Birdsong run. Routines clone each repo at its default branch, and nothing here said to look
+further, so a review would have read `armandld/BA_Proj@main` — last touched 11 June except for
+the bridge — while the actual work sat on `claude/kind-babbage-927g10`, pushed that morning and
+carrying a falsified published result. `## Reviewing WORK_REPOS` now opens with the fetch-and-
+sort-by-recency step. Sharpens *latest pushes first*, which said recency without saying it meant
+branches.
+
 **WORK_REPOS narrows to BA_Proj alone** ([#12](https://github.com/armandld/desire/pull/12)) —
 USER's ruling before the first Birdsong run. `rel-int/wiki-content` and `rel-int/optyx` leave
 WORK_REPOS and FOCUS; the optyx paragraph goes with them, since it only existed to explain a

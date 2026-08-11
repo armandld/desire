@@ -30,6 +30,16 @@ proofs (skip if the study is test-only), tests (skip if it's theory-only), discu
 conclusion. Every review checks the code against that structure holding together, not
 just correctness — and flags it, loudly and first, if it doesn't.
 
+**Review branches, not the default branch.** A routine clones each repo at its default
+branch, and in a WORK_REPO that branch is the stale one: the live work sits on branches
+that haven't merged yet. Fetch everything and order by recency before reading anything:
+```
+git fetch --all --prune
+git for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname:short)' refs/remotes/
+```
+Review from the top of that list down. The default branch earns a review when it appears
+there like any other, not because it's the default.
+
 FOCUS is a list of `<repo>:<path>` entries, one per WORK_REPO at most, each scoping
 that repo's reviews to one section.
 - A repo with a FOCUS entry: every phase, any time, reviews only that section and

@@ -67,11 +67,18 @@ environments.
 
 For any GitHub write that must appear as AGENT — issue/PR comment, PR/issue creation, reaction —
 dispatch [`agent-arm-github.yml`](.github/workflows/agent-arm-github.yml) instead of writing
-directly:
+directly. Dispatch with the **`mcp__github__actions_run_trigger` tool**, method `run_workflow`,
+`workflow_id: agent-arm-github.yml`, `ref: main`, and one input named `request` holding the JSON:
 ```
-gh workflow run agent-arm-github.yml --ref main \
-  -f request='{"agent":"agent-arm","operation":"comment.create","repo":"OWNER/REPO","number":42,"body":"..."}'
+{"agent":"agent-arm","operation":"comment.create","repo":"OWNER/REPO","number":42,"body":"..."}
 ```
+Not `gh workflow run` — `gh` cannot dispatch from inside a session. It reaches GitHub through the
+proxy's injected credential, which has no Actions write permission and answers every dispatch with
+`403 Resource not accessible by integration`. The MCP tool authenticates elsewhere and works. A
+routine created through the HTTP API can carry an `allowed_tools` list that omits the MCP tools
+entirely, leaving nothing that can dispatch: create routines from the web form instead, which
+restricts nothing.
+
 The dispatch call itself still goes out as USER — that's only the trigger, not the resulting
 object's author. The runner posts with a repo-scoped `AGENT_ARM_GITHUB_TOKEN` secret, unproxied.
 Every repo that needs this needs its own copy of the workflow, script, and secret: the bridge

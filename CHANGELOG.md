@@ -4,6 +4,14 @@ What landed on `main`, newest first — when each rule started binding, and what
 
 ## 2026-08-11
 
+**The bridge is dispatched by MCP tool, not `gh`** ([#11](https://github.com/armandld/desire/pull/11)) —
+`gh workflow run` 403s from inside a session: it authenticates through the proxy's injected
+credential, which carries no Actions write permission. `mcp__github__actions_run_trigger` does
+work. Caught by testing the exact command the rule below told the agents to run, before the
+routines ran it themselves — both were configured with an `allowed_tools` list that omitted the
+MCP tools, so neither could have dispatched at all. Replaces the `gh workflow run` invocation
+that landed with the bridge earlier the same night.
+
 **The bridge's token must be a classic PAT** ([#10](https://github.com/armandld/desire/pull/10)) —
 the bridge landed working on DESIRE_REPO the same night, after four failed dispatches. The last
 one was the informative one: a fine-grained PAT cannot act on a repo where its owner is only a

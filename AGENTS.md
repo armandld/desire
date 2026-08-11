@@ -77,6 +77,14 @@ object's author. The runner posts with a repo-scoped `AGENT_ARM_GITHUB_TOKEN` se
 Every repo that needs this needs its own copy of the workflow, script, and secret: the bridge
 refuses any `repo` other than the one it's running in.
 
+**`AGENT_ARM_GITHUB_TOKEN` must be a CLASSIC PAT with the `repo` scope.** A fine-grained PAT
+cannot work here, whatever its permissions: GitHub does not let fine-grained tokens act on
+repositories where the account is only a collaborator, and AGENT owns none of the repos it
+works in. The symptom is a token that authenticates fine but 403s every write with `Resource
+not accessible by personal access token`, while its own settings page reads *This token does
+not have access to any repositories* even with "All repositories" selected — that setting only
+covers repos the token's owner owns.
+
 Git commit authorship is unaffected by the proxy — it's local metadata, not an API call — and is
 already set to AGENT for every remote session by the session-start hook.
 

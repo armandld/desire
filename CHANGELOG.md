@@ -4,6 +4,14 @@ What landed on `main`, newest first — when each rule started binding, and what
 
 ## 2026-08-11
 
+**WORK_REPOS narrows to BA_Proj alone** ([#12](https://github.com/armandld/desire/pull/12)) —
+USER's ruling before the first Birdsong run. `rel-int/wiki-content` and `rel-int/optyx` leave
+WORK_REPOS and FOCUS; the optyx paragraph goes with them, since it only existed to explain a
+no-FOCUS entry that no longer exists. The routines still clone six repos, so a sentence now says
+what cloning does and doesn't make a repo: only the Config list is WORK_REPOS, the rest of the
+checkout is readable but never reviewed. Replaces the three-repo list from 2026-07-29 and the
+FOCUS pair from the same day.
+
 **The bridge is dispatched by MCP tool, not `gh`** ([#11](https://github.com/armandld/desire/pull/11)) —
 `gh workflow run` 403s from inside a session: it authenticates through the proxy's injected
 credential, which carries no Actions write permission. `mcp__github__actions_run_trigger` does

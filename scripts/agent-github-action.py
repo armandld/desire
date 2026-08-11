@@ -49,7 +49,7 @@ request = urllib.request.Request(
     data=json.dumps(data).encode(),
     method=method,
     headers={
-        "Authorization": "Bearer " + os.environ["AGENT_GITHUB_TOKEN"],
+        "Authorization": "Bearer " + os.environ["AGENT_GITHUB_TOKEN"].strip(),
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
         "Content-Type": "application/json",

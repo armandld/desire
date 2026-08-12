@@ -16,6 +16,11 @@ own; and Appendix A constrains the order of the campaign, so a finding reached b
 step is worth nothing. Both are stated in VIGIL.md because an agent told only to *resolve
 defects* would break them by 4am.
 
+Vigil shares the night with Evening and takes priority in WORK_REPOS — where it has an open PR,
+Evening adds to it instead of opening its own, so the two never race on the same files. Its
+standard is written as the model doing what its documentation says, not as a green suite: a
+test that cannot fail is itself the finding.
+
 **The session-start hook goes** ([#19](https://github.com/armandld/desire/pull/19)) — it existed
 to install `gh` and `jq`, and nothing commited uses either: `check-approval.sh` is curl plus
 python3, the bridge is an MCP dispatch plus urllib on the runner. `gh` had already lost its last

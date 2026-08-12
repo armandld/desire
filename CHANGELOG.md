@@ -4,6 +4,19 @@ What landed on `main`, newest first — when each rule started binding, and what
 
 ## 2026-08-12
 
+**Vigil splits method from repo** ([#24](https://github.com/armandld/desire/pull/24)) — USER's
+ruling, ahead of pointing Vigil at a second repo. `VIGIL.md` keeps the method and now knows no
+repository; everything specific to one moves to `VIGIL_<repo>.md`, read from `WORK_REPOS` by
+dropping the owner. `VIGIL_BA_Proj.md` is the first.
+
+**A WORK_REPO without a card is not auditable.** Without one Vigil cannot know where to record a
+defect or what is frozen on purpose, and it does not guess: it opens an issue asking for the card
+and works elsewhere. That is the rule the first run's failure argues for — it stopped rather than
+inventing an output channel, and was right to.
+
+The V1 calibration stays in `VIGIL.md`, labelled as one repo's audit: the proportions transport,
+the totals do not.
+
 **VIGIL.md is rewritten from what actually worked**
 ([#23](https://github.com/armandld/desire/pull/23), closes
 [#22](https://github.com/armandld/desire/issues/22)) — USER's own method, written from the V1

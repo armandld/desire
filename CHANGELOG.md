@@ -4,6 +4,18 @@ What landed on `main`, newest first — when each rule started binding, and what
 
 ## 2026-08-11
 
+**🦉 Vigil joins, to audit the object of study**
+([#20](https://github.com/armandld/desire/pull/20)) — USER's ruling: a fourth role that spends
+the night auditing `BA_Proj:src/` by contract and proposes each finding as a PR. Its method is
+not written here — `PLAN_PREPRINT.md` §7 already defines it, and VIGIL.md points at it rather
+than forking a second version that would drift.
+
+Two guardrails come from the audited repo's own rules, which the brief did not mention:
+`src/` is the object of study, so changing it is a scientific claim and Vigil never merges its
+own; and Appendix A constrains the order of the campaign, so a finding reached by skipping a
+step is worth nothing. Both are stated in VIGIL.md because an agent told only to *resolve
+defects* would break them by 4am.
+
 **The session-start hook goes** ([#19](https://github.com/armandld/desire/pull/19)) — it existed
 to install `gh` and `jq`, and nothing commited uses either: `check-approval.sh` is curl plus
 python3, the bridge is an MCP dispatch plus urllib on the runner. `gh` had already lost its last

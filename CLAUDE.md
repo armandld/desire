@@ -2,3 +2,4 @@
 @BIRDSONG.md
 @DAYLIGHT.md
 @EVENING.md
+@VIGIL.md

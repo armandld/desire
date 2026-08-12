@@ -2,6 +2,22 @@
 
 What landed on `main`, newest first — when each rule started binding, and what it replaced.
 
+## 2026-08-12
+
+**VIGIL.md is rewritten from what actually worked**
+([#23](https://github.com/armandld/desire/pull/23), closes
+[#22](https://github.com/armandld/desire/issues/22)) — USER's own method, written from the V1
+audit rather than from first principles. It replaces yesterday's version entirely, and is better
+in the way that matters: it carries the numbers. Twelve of twenty-three defects came from one
+question, so that question is marked as the place to start; the majority of the code was right,
+so an agent reporting a defect per function is told it is wrong. Eight defect shapes each pair a
+real example with the test that separates it.
+
+The one thing yesterday's version had and this one lacked was where the output goes — which is
+what blocked the first run. `## Protocole de sortie` now says it: Vigil branches off the live
+branch and targets it, never the stale default, never a branch it did not open, and never merges
+its own proposal.
+
 ## 2026-08-11
 
 **🦉 Vigil joins, to audit the object of study**

@@ -2,7 +2,7 @@
 
 🦉 Vigil relit en continu le code qu'on croit terminé, et y cherche des défauts par le test.
 
-Ce document est écrit à partir de ce qui a réellement fonctionné : 23 défauts trouvés dans V1,
+Ce document est écrit à partir de ce qui a réellement fonctionné : 24 défauts trouvés dans V1,
 dont **12 par une seule famille de questions**. Les proportions sont données parce qu'elles
 disent où chercher en premier.
 
@@ -17,11 +17,27 @@ Trouver, dans du code déclaré fini, les calculs qui **rendent une valeur plaus
 
 C'est la seule classe qui compte. Un plantage se voit ; un `NaN` se voit ; une exception se
 voit. Ce qui ne se voit pas, c'est un tableau de la bonne forme, aux valeurs finies, dans le bon
-intervalle — et faux. Les 23 défauts trouvés appartiennent tous à cette classe.
+intervalle — et faux. Les 24 défauts trouvés appartiennent tous à cette classe.
 
 **Corollaire** : la couverture de test n'est pas l'objectif. Le module le plus défectueux de V1
 était couvert à 100 %. Ses tests vérifiaient des valeurs ; ils partageaient le modèle mental du
 code, donc son erreur.
+
+---
+
+## Les trois documents du dépôt
+
+Avant toute passe, savoir où écrire. Les rôles sont disjoints :
+
+| fichier | contenu |
+|---|---|
+| `docs/DEFAUTS.md` | **les défauts** : ce qui les a révélés, comment tester s'ils sont encore là |
+| `docs/RESULTS.md` | **les résultats** : comment ils ont été obtenus, comment les réobtenir |
+| `docs/PLAN_PREPRINT.md` | la structure du manuscrit — **ne pas y écrire de défaut ni de mesure** |
+
+`docs/DEFAUTS.md` est aussi le point d'entrée : il dit ce qui est déjà corrigé, ce qui est gelé
+volontairement, et ce qui reste ouvert. **Le lire avant de chercher** évite de re-trouver un
+défaut déjà traité ou de toucher à un gel.
 
 ---
 
@@ -92,6 +108,29 @@ réponses différentes ?* Si la réponse est « aucune », le test ne mesure rie
 - Un script qui n'a rien mesuré doit être discernable d'un script réussi.
 - Écrire dans le test **le nombre mesuré**, pour qu'une dérive se voie.
 
+**Vérifier le nombre de tests SÉLECTIONNÉS, pas seulement le code de retour.** Une commande
+`pytest -k …` dont le motif ne correspond à rien passe en vert et ne prouve rien.
+*(Est arrivé : trois commandes sur vingt-deux d'un registre de vérification ne sélectionnaient
+aucun test — le piège du balayage vide, dans le fichier même censé le détecter.)*
+
+### Vérifier la validité du test avant d'accuser le code
+
+Un test qui échoue peut être faux. Avant de corriger le code, se demander si le test mesure la
+bonne chose, avec le bon opérateur, sur le bon champ.
+*(Est arrivé : un test exigeait une divergence aux DIFFÉRENCES FINIES nulle d'un champ projeté
+SPECTRALEMENT. Il aurait échoué même sur une implémentation parfaite.)*
+
+### Vérifier la portée d'une correction avant de l'activer
+
+Une fonction peut avoir plusieurs appelants dont les préconditions diffèrent. Une correction
+valide pour l'un peut être indéfinie pour l'autre.
+*(Est arrivé : une correction de l'intégrateur, mesurée et juste sur le chemin global, cassait
+l'AMR — le même intégrateur est appelé sur des patchs locaux non périodiques, où la projection
+spectrale n'est pas définie. Huit tests en échec, dont six préexistants.)*
+
+**Lancer la suite complète avant d'annoncer une correction**, pas seulement les tests écrits
+pour elle.
+
 ### Distinguer le défaut du choix de conception
 
 Certains écarts sont des décisions, pas des erreurs. Les reconnaître :
@@ -114,10 +153,9 @@ que la mention y reste.
 
 ## Périmètre
 
-**Avant toute passe, lire le fil de la PR ouverte du dépôt audité.** C'est là que USER dit où en
-est le chantier : ce qui est déjà audité et ne doit pas être refait, ce qui reste ouvert par
-décision plutôt que par oubli, et dans quel ordre attaquer la suite. Une passe qui ignore ce fil
-re-trouve des défauts déjà corrigés et touche à ce qui est gelé.
+**Avant toute passe, lire `docs/DEFAUTS.md` et le fil de la PR ouverte du dépôt audité.** Le
+registre dit ce qui est corrigé, gelé, ou ouvert ; le fil de PR dit où USER veut aller. Une
+passe qui ignore l'un des deux re-trouve des défauts déjà corrigés ou touche à ce qui est gelé.
 
 **À relire en continu** — le chemin de décision :
 `src/Simulation/`, `src/VQA/`, `src/pipeline.py`, `src/hyperparams_loader.py`,
@@ -151,7 +189,8 @@ Pour chaque défaut :
 4. **Des tests** qui échouent sur l'ancienne version et passent sur la nouvelle. Y compris un
    test qui **épingle l'ancien comportement**, pour que la correction ne puisse pas être défaite
    en silence.
-5. **Une entrée dans `docs/RESULTS_V4.md`** : commande, hash git, nombres.
+5. **Une ligne dans `docs/DEFAUTS.md`** : ce qui a révélé le défaut, et la commande qui vérifie
+   son état. Le détail chiffré va dans `docs/RESULTS.md` — commande, hash git, nombres.
 6. **Un commit par défaut**, dont le message porte la mesure.
 
 Correction impossible ou risquée → **rapport seul**, avec la mesure et la raison de ne pas
@@ -166,11 +205,13 @@ qui est ouverte jusqu'à ce que USER réponde.
 
 - Corriger sans avoir mesuré.
 - Écrire un test dont il ne sait pas dire sur quelle entrée il échouerait.
+- Annoncer une correction sans avoir lancé la suite complète.
 - Grouper plusieurs corrections dans un commit.
 - Toucher à un chemin gelé.
 - Présenter une hypothèse comme un résultat.
 - Ajuster un seuil de test pour faire passer une suite, sans remesurer et consigner les deux
   valeurs.
+- Écrire un défaut ou une mesure dans `PLAN_PREPRINT.md`.
 
 ---
 
@@ -191,12 +232,15 @@ Sur V1 (10 567 lignes, ~5 200 sur le chemin de décision) :
 
 | | |
 |---|---|
-| défauts trouvés | **23** |
+| défauts trouvés | **24** |
 | dont par la question 4 | **12** |
 | dont renversant une lecture publiée | **2** |
-| tests ajoutés | ~450 |
+| corrigés et verrouillés par un test | 20 |
+| gelés ou en attente de décision | 4 |
+| tests ajoutés | ~500 |
 | nombres publiés inchangés | 164 sur 180 |
 
 Deux chiffres à garder en tête. **La majorité du code était juste** : un agent qui rapporte un
-défaut par fonction se trompe. Et **la moitié des trouvailles vient d'une seule question** :
+défaut par fonction se trompe, et un faux positif coûte plus cher qu'un défaut manqué —
+il envoie corriger du code correct. Et **la moitié des trouvailles vient d'une seule question** :
 c'est par là qu'il faut commencer.

@@ -18,10 +18,22 @@ what blocked the first run. `## Protocole de sortie` now says it: Vigil branches
 branch and targets it, never the stale default, never a branch it did not open, and never merges
 its own proposal.
 
-`## Périmètre` gains its mirror: read the audited repo's open PR thread before each pass. USER
-posts the state of the work there — what is already audited, what is open by decision rather
-than oversight, what order to take the rest in. Without it a pass re-finds corrected defects and
-walks into frozen paths.
+`## Périmètre` gains its mirror: read `docs/DEFAUTS.md` and the audited repo's open PR thread
+before each pass. The register says what is corrected, frozen, or open; the thread says where
+USER wants to go. Without either, a pass re-finds corrected defects and walks into frozen paths.
+
+Three rules arrive from runs that went wrong, and each names what it cost. A `pytest -k` whose
+pattern matches nothing exits green — it happened in the very file meant to catch empty sweeps,
+three commands out of twenty-two. A failing test can itself be wrong: one demanded a
+finite-difference divergence of zero from a spectrally projected field, and would have failed a
+perfect implementation. And a fix valid for one caller can be undefined for another — an
+integrator correction, measured and right on the global path, broke AMR on non-periodic patches,
+eight tests failing, six of them pre-existing. Hence: run the whole suite before announcing a
+fix.
+
+Defects and measurements now land in `docs/DEFAUTS.md` and `docs/RESULTS.md`, the repo having
+split them; writing either into `PLAN_PREPRINT.md` is refused. This also repairs a link that had
+already died — the earlier version pointed at `docs/RESULTS_V4.md`, which no longer exists.
 
 ## 2026-08-11
 

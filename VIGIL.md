@@ -96,6 +96,38 @@ Cela vaut aussi contre soi : plusieurs fois, une hypothèse plausible s'est rév
 mesure. *(« Un splitting de Strang rendrait l'ordre 2 » — mesuré : erreurs identiques à la
 dernière décimale, parce qu'un projecteur idempotent n'a pas de demi-pas.)*
 
+### Établir la ligne de base avant de toucher quoi que ce soit
+
+Lancer la suite complète **au début de la passe**, avant toute modification, et
+consigner le résultat. Un test déjà rouge à l'arrivée n'est pas une conséquence de la
+passe, et un agent qui ne l'a pas noté se l'attribuera — ou pire, « corrigera » du code
+sain pour le faire passer.
+
+Si la suite est rouge au départ : le dire dans la PR, et ne pas y toucher sans mesurer
+d'abord d'où vient chaque échec.
+
+### Mesurer la variance de la mesure avant de conclure sur un écart
+
+Une grandeur issue d'un tirage aléatoire — échantillonnage, optimiseur stochastique,
+recuit — ne se mesure pas une fois. **Refaire la mesure de référence deux fois avant de
+comparer quoi que ce soit.** Si les deux références diffèrent de plus que l'effet
+cherché, la grandeur ne tranche rien : le dire, et ne pas conclure.
+
+*(Est arrivé : un contraste mesuré à +0,0186 ± 0,0067 sur 16 tirages et à
++0,0053 ± 0,0029 sur 8, même configuration — un facteur 3,5 entre deux exécutions
+de la même chose. Deux assertions calibrées « à 2σ » tombaient précisément dans la zone
+où la variation d'exécution décide du verdict.)*
+
+### Un test qui passait et qui échoue après une correction délibérée
+
+Ce n'est ni un défaut du code, ni un test faux : c'est un **seuil périmé**. Le code a
+légitimement changé sous lui.
+
+Ne pas annuler la correction. Ne pas retoucher le seuil en silence. Remesurer dans les
+conditions du test, consigner **l'ancienne et la nouvelle valeur**, et dire ce qui a
+déplacé le nombre. Si la grandeur s'avère non reproductible à cette précision, réécrire
+le test sur une grandeur qui l'est.
+
 ### Choisir le champ d'essai qui SÉPARE
 
 Sur Taylor-Green, deux conventions de rotationnel opposées rendent la **même** enstrophie, par
@@ -196,6 +228,11 @@ Pour chaque défaut :
 Correction impossible ou risquée → **rapport seul**, avec la mesure et la raison de ne pas
 corriger.
 
+Troisième cas : **correction mesurée, juste, et inapplicable en l'état** — parce qu'une
+autre fonction appelle le même code avec d'autres préconditions. Ne pas l'activer, ne
+pas la jeter : l'implémenter derrière un drapeau désactivé par défaut, avec la raison
+écrite **dans le code** et un test qui vérifie que la raison y reste. Un drapeau
+désactivé sans justification se fait réactiver par erreur.
 Une famille de défauts par PR, et une PR à la fois : pousser la trouvaille suivante sur celle
 qui est ouverte jusqu'à ce que USER réponde.
 
@@ -224,6 +261,10 @@ balayage.
 
 Quand un module est fini, écrire ce qui a été **vérifié et trouvé sain** — c'est aussi un
 résultat, et cela évite de le relire deux fois.
+
+Une passe a une fin. Si un module ne rend rien après une lecture complète, l'écrire et
+passer au suivant — ne pas y revenir la même nuit. Si une seule suite de tests dépasse
+l'heure, elle n'est pas un outil de passe : la lancer en fond et travailler ailleurs.
 
 ---
 

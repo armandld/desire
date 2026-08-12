@@ -21,7 +21,7 @@ the totals do not.
 ([#23](https://github.com/armandld/desire/pull/23), closes
 [#22](https://github.com/armandld/desire/issues/22)) — USER's own method, written from the V1
 audit rather than from first principles. It replaces yesterday's version entirely, and is better
-in the way that matters: it carries the numbers. Twelve of twenty-three defects came from one
+in the way that matters: it carries the numbers. Twelve of twenty-four defects came from one
 question, so that question is marked as the place to start; the majority of the code was right,
 so an agent reporting a defect per function is told it is wrong. Eight defect shapes each pair a
 real example with the test that separates it.

@@ -4,6 +4,29 @@ What landed on `main`, newest first — when each rule started binding, and what
 
 ## 2026-08-12
 
+**A pass ends when the budget does, not when a module does**
+([#26](https://github.com/armandld/desire/pull/26)) — `## Rythme` said *une passe = un module*,
+so Vigil finished `hyperparams_loader.py` and stopped, hours of budget unspent. It obeyed. The
+protocol carried a second stop — *pousser la trouvaille suivante… jusqu'à ce que USER réponde* —
+which reads as: publish one finding, then wait. Both are gone. Reading a module whole still
+stands; one does not go faster by reading faster, only longer by continuing.
+
+**Not pushing to someone else's branch becomes a refusal, not prose.** It was already written in
+three places, and Vigil still pushed `3fe5da6` straight onto USER's `kind-babbage-927g10`, head
+of USER's own PR — costing a renumbering of D-29 through D-36 because it had taken D-28. The
+refusal list is what binds; the rule was missing from it. Added, with its corollary: open the PR
+at the first register line, since a number reserved on an unpublished branch is reserved for
+nobody.
+
+**Scope moves out of Config and into the audited repo.** `FOCUS` was declared twice — `[""]` here
+and a real path in `VIGIL_BA_Proj.md` — and `[""]` matched neither branch of this file's own
+with/without rule. Scope now comes from the repo's own account of what is done, frozen, and next;
+the card names the files holding it. Replaces the FOCUS list from 2026-08-11.
+
+Also repaired: step 3 of the output protocol had been overwritten by the disabled-flag rule,
+silently deleting *une mesure après* — the half of before/after the whole method rests on. Counts
+aligned to 36 defects, 34 locked by a test.
+
 **Vigil splits method from repo** ([#24](https://github.com/armandld/desire/pull/24)) — USER's
 ruling, ahead of pointing Vigil at a second repo. `VIGIL.md` keeps the method and now knows no
 repository; everything specific to one moves to `VIGIL_<repo>.md`, read from `WORK_REPOS` by

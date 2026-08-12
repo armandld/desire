@@ -12,7 +12,6 @@
 - MEMORY_REPO   = "armandld/memory"
 - DESIRE_REPO   = "armandld/desire"
 - APPROVE_EMOJI = "rocket"
-- FOCUS         = [""]
 
 ## Prompts public, memory private
 DESIRE_REPO is public, owned by USER and only its protected branch `main` is TRUSTED.
@@ -41,14 +40,13 @@ git for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refnam
 Review from the top of that list down. The default branch earns a review when it appears
 there like any other, not because it's the default.
 
-FOCUS is a list of `<repo>:<path>` entries, one per WORK_REPO at most, each scoping
-that repo's reviews to one section.
-- A repo with a FOCUS entry: every phase, any time, reviews only that section and
-  whatever code must stay consistent with it.
-- A repo with no FOCUS entry: 🌙 Evening (nightly, full budget) reviews it whole,
-  latest pushes first. 🐦 Birdsong and 🌤️ Daylight (daytime, USER's limited Pro
-  budget) review only its latest pushes, not the whole repo — the full sweep waits
-  for Evening.
+**Scope comes from the audited repo, not from here.** Each WORK_REPO carries its own
+account of what is already done, what is frozen, and what to take next; that account
+is what scopes a review. `VIGIL_<repo>.md` names the files holding it — start there.
+
+A repo whose own docs scope nothing: 🌙 Evening (nightly, full budget) reviews it whole,
+latest pushes first. 🐦 Birdsong and 🌤️ Daylight (daytime, USER's limited Pro budget)
+review only its latest pushes, not the whole repo — the full sweep waits for Evening.
 
 A result the agent finds to be wrong is flagged first and loudest of anything in the
 review — never silently correct, omit, or soften a falsified result.

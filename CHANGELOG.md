@@ -18,6 +18,11 @@ what blocked the first run. `## Protocole de sortie` now says it: Vigil branches
 branch and targets it, never the stale default, never a branch it did not open, and never merges
 its own proposal.
 
+`## Périmètre` gains its mirror: read the audited repo's open PR thread before each pass. USER
+posts the state of the work there — what is already audited, what is open by decision rather
+than oversight, what order to take the rest in. Without it a pass re-finds corrected defects and
+walks into frozen paths.
+
 ## 2026-08-11
 
 **🦉 Vigil joins, to audit the object of study**

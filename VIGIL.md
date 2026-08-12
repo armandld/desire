@@ -114,6 +114,11 @@ que la mention y reste.
 
 ## Périmètre
 
+**Avant toute passe, lire le fil de la PR ouverte du dépôt audité.** C'est là que USER dit où en
+est le chantier : ce qui est déjà audité et ne doit pas être refait, ce qui reste ouvert par
+décision plutôt que par oubli, et dans quel ordre attaquer la suite. Une passe qui ignore ce fil
+re-trouve des défauts déjà corrigés et touche à ce qui est gelé.
+
 **À relire en continu** — le chemin de décision :
 `src/Simulation/`, `src/VQA/`, `src/pipeline.py`, `src/hyperparams_loader.py`,
 `src/call_vqa_shell.py`, puis `study/`.

@@ -2,6 +2,52 @@
 
 What landed on `main`, newest first — when each rule started binding, and what it replaced.
 
+## 2026-08-12
+
+**Vigil splits method from repo** ([#24](https://github.com/armandld/desire/pull/24)) — USER's
+ruling, ahead of pointing Vigil at a second repo. `VIGIL.md` keeps the method and now knows no
+repository; everything specific to one moves to `VIGIL_<repo>.md`, read from `WORK_REPOS` by
+dropping the owner. `VIGIL_BA_Proj.md` is the first.
+
+**A WORK_REPO without a card is not auditable.** Without one Vigil cannot know where to record a
+defect or what is frozen on purpose, and it does not guess: it opens an issue asking for the card
+and works elsewhere. That is the rule the first run's failure argues for — it stopped rather than
+inventing an output channel, and was right to.
+
+The V1 calibration stays in `VIGIL.md`, labelled as one repo's audit: the proportions transport,
+the totals do not.
+
+**VIGIL.md is rewritten from what actually worked**
+([#23](https://github.com/armandld/desire/pull/23), closes
+[#22](https://github.com/armandld/desire/issues/22)) — USER's own method, written from the V1
+audit rather than from first principles. It replaces yesterday's version entirely, and is better
+in the way that matters: it carries the numbers. Twelve of twenty-three defects came from one
+question, so that question is marked as the place to start; the majority of the code was right,
+so an agent reporting a defect per function is told it is wrong. Eight defect shapes each pair a
+real example with the test that separates it.
+
+The one thing yesterday's version had and this one lacked was where the output goes — which is
+what blocked the first run. `## Protocole de sortie` now says it: Vigil branches off the live
+branch and targets it, never the stale default, never a branch it did not open, and never merges
+its own proposal.
+
+`## Périmètre` gains its mirror: read `docs/DEFAUTS.md` and the audited repo's open PR thread
+before each pass. The register says what is corrected, frozen, or open; the thread says where
+USER wants to go. Without either, a pass re-finds corrected defects and walks into frozen paths.
+
+Three rules arrive from runs that went wrong, and each names what it cost. A `pytest -k` whose
+pattern matches nothing exits green — it happened in the very file meant to catch empty sweeps,
+three commands out of twenty-two. A failing test can itself be wrong: one demanded a
+finite-difference divergence of zero from a spectrally projected field, and would have failed a
+perfect implementation. And a fix valid for one caller can be undefined for another — an
+integrator correction, measured and right on the global path, broke AMR on non-periodic patches,
+eight tests failing, six of them pre-existing. Hence: run the whole suite before announcing a
+fix.
+
+Defects and measurements now land in `docs/DEFAUTS.md` and `docs/RESULTS.md`, the repo having
+split them; writing either into `PLAN_PREPRINT.md` is refused. This also repairs a link that had
+already died — the earlier version pointed at `docs/RESULTS_V4.md`, which no longer exists.
+
 ## 2026-08-11
 
 **🦉 Vigil joins, to audit the object of study**

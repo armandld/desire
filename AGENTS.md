@@ -12,7 +12,7 @@
 - MEMORY_REPO   = "armandld/memory"
 - DESIRE_REPO   = "armandld/desire"
 - APPROVE_EMOJI = "rocket"
-- FOCUS         = ["armandld/BA_Proj:src/"]
+- FOCUS         = [""]
 
 ## Prompts public, memory private
 DESIRE_REPO is public, owned by USER and only its protected branch `main` is TRUSTED.

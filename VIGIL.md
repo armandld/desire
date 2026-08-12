@@ -148,6 +148,32 @@ réponses différentes ?* Si la réponse est « aucune », le test ne mesure rie
 *(Est arrivé : trois commandes sur vingt-deux d'un registre de vérification ne sélectionnaient
 aucun test — le piège du balayage vide, dans le fichier même censé le détecter.)*
 
+### Un test qui échoue après un changement délibéré ne s'actualise pas : il se remesure
+
+« Actualiser » invite à retoucher le seuil jusqu'à ce que ça passe. **Remesurer**
+oblige à comprendre pourquoi le nombre a bougé.
+
+Consigner l'ancienne valeur, la nouvelle, et ce qui les sépare. Si la grandeur
+s'avère non reproductible à la précision du test, changer de **grandeur** — pas
+de seuil.
+
+*(Est arrivé : un contraste de décision assertí à 2σ variait d'un facteur 3,5
+entre deux exécutions. Aucun seuil n'était le bon. Le test a été déplacé sur le
+coefficient sous-jacent, déterministe à l'écart nul.)*
+
+### Mesurer avec l'opérateur assorti
+
+Une grandeur discrète n'a de valeur que relativement à l'opérateur qui la calcule.
+Mesurer la divergence d'un champ avec un stencil différent de celui qui l'a
+produit ne mesure pas le champ : cela mesure l'écart entre deux opérateurs.
+
+Avant toute mesure : *quel opérateur a construit cette grandeur ?* Utiliser
+celui-là.
+
+*(Est arrivé trois fois. La dernière : un défaut de huit ordres de grandeur
+restait invisible mesuré au spectral, et sautait aux yeux mesuré en FD4 — le
+même stencil que le second membre.)*
+
 ### Vérifier la validité du test avant d'accuser le code
 
 Un test qui échoue peut être faux. Avant de corriger le code, se demander si le test mesure la
@@ -216,10 +242,15 @@ Pour chaque défaut :
 1. **Une mesure avant** — nombre, commande, conditions.
 2. **La correction**, minimale, avec en commentaire *pourquoi* l'ancienne version était fausse
    et *ce qui a été mesuré*.
-3. **Une mesure après**, dans les mêmes conditions.
-4. **Des tests** qui échouent sur l'ancienne version et passent sur la nouvelle. Y compris un
-   test qui **épingle l'ancien comportement**, pour que la correction ne puisse pas être défaite
-   en silence.
+3. **Une mesure après, correction mesurée, juste, et inapplicable en l'état** — parce qu'une
+autre fonction appelle le même code avec d'autres préconditions. Ne pas l'activer, ne
+pas la jeter : l'implémenter derrière un drapeau désactivé par défaut, avec la raison
+écrite **dans le code** et un test qui vérifie que la raison y reste. Un drapeau
+désactivé sans justification se fait réactiver par erreur.
+4. **Des tests** qui échouent sur l'ancienne version et passent sur la nouvelle.
+   Y compris un test qui **épingle l'ancien comportement**, pour que la
+   correction ne puisse pas être défaite en silence. Un test qui n'a jamais
+   échoué n'a jamais rien prouvé.
 5. **Une ligne dans le registre des défauts** : ce qui a révélé le défaut, et la commande qui
    vérifie son état. Le détail chiffré va dans le registre des résultats — commande, hash git,
    nombres. La fiche du dépôt nomme ces deux fichiers.
@@ -228,13 +259,9 @@ Pour chaque défaut :
 Correction impossible ou risquée → **rapport seul**, avec la mesure et la raison de ne pas
 corriger.
 
-Troisième cas : **correction mesurée, juste, et inapplicable en l'état** — parce qu'une
-autre fonction appelle le même code avec d'autres préconditions. Ne pas l'activer, ne
-pas la jeter : l'implémenter derrière un drapeau désactivé par défaut, avec la raison
-écrite **dans le code** et un test qui vérifie que la raison y reste. Un drapeau
-désactivé sans justification se fait réactiver par erreur.
 Une famille de défauts par PR, et une PR à la fois : pousser la trouvaille suivante sur celle
 qui est ouverte jusqu'à ce que USER réponde.
+
 
 ---
 

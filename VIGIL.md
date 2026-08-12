@@ -25,19 +25,22 @@ code, donc son erreur.
 
 ---
 
-## Les trois documents du dépôt
+## La fiche du dépôt
 
-Avant toute passe, savoir où écrire. Les rôles sont disjoints :
+Ce document donne la méthode ; il ne connaît aucun dépôt. Ce qui est propre à un dépôt — où
+consigner un défaut, quels chemins relire, quoi ne jamais toucher — vit dans une fiche à part,
+dans DESIRE_REPO :
 
-| fichier | contenu |
-|---|---|
-| `docs/DEFAUTS.md` | **les défauts** : ce qui les a révélés, comment tester s'ils sont encore là |
-| `docs/RESULTS.md` | **les résultats** : comment ils ont été obtenus, comment les réobtenir |
-| `docs/PLAN_PREPRINT.md` | la structure du manuscrit — **ne pas y écrire de défaut ni de mesure** |
+```
+VIGIL_<nom-du-dépôt>.md      ex. VIGIL_BA_Proj.md pour armandld/BA_Proj
+```
 
-`docs/DEFAUTS.md` est aussi le point d'entrée : il dit ce qui est déjà corrigé, ce qui est gelé
-volontairement, et ce qui reste ouvert. **Le lire avant de chercher** évite de re-trouver un
-défaut déjà traité ou de toucher à un gel.
+**Avant de travailler dans un WORK_REPO, lire sa fiche.** Le nom se déduit de l'entrée de
+`WORK_REPOS` en retirant le propriétaire.
+
+**Un WORK_REPO sans fiche n'est pas auditable.** Sans elle, Vigil ignore où écrire ses
+trouvailles et ce qui est gelé volontairement — il ne le devine pas. Il ouvre une issue sur
+DESIRE_REPO demandant la fiche, et travaille ailleurs en attendant.
 
 ---
 
@@ -153,21 +156,17 @@ que la mention y reste.
 
 ## Périmètre
 
-**Avant toute passe, lire `docs/DEFAUTS.md` et le fil de la PR ouverte du dépôt audité.** Le
-registre dit ce qui est corrigé, gelé, ou ouvert ; le fil de PR dit où USER veut aller. Une
-passe qui ignore l'un des deux re-trouve des défauts déjà corrigés ou touche à ce qui est gelé.
+La fiche du dépôt donne les chemins : ce qui est sur le chemin de décision, ce qui ne se relit
+pas, ce qui ne se touche pas. Deux lectures s'y ajoutent avant chaque passe :
 
-**À relire en continu** — le chemin de décision :
-`src/Simulation/`, `src/VQA/`, `src/pipeline.py`, `src/hyperparams_loader.py`,
-`src/call_vqa_shell.py`, puis `study/`.
+- **le registre des défauts** que la fiche désigne — il dit ce qui est corrigé, gelé, ou ouvert ;
+- **le fil de la PR ouverte du dépôt audité** — c'est là que USER dit où il veut aller.
 
-**À ne pas relire** : les scripts d'analyse et de visualisation, sauf demande. Beaucoup sont
-inutilisés.
+Une passe qui ignore l'un des deux re-trouve des défauts déjà corrigés ou touche à ce qui est
+gelé.
 
-**À ne jamais modifier sans autorisation explicite** :
-- tout fichier portant la mention d'un gel (`phase 1b reste intouchée`) ;
-- `results/hyperparams/` — entrée gelée ;
-- tout ce qui change un nombre publié : le signaler, ne pas l'appliquer.
+Vaut partout, sans que la fiche ait à le redire : **tout ce qui change un nombre publié se
+signale et ne s'applique pas.**
 
 ---
 
@@ -189,8 +188,9 @@ Pour chaque défaut :
 4. **Des tests** qui échouent sur l'ancienne version et passent sur la nouvelle. Y compris un
    test qui **épingle l'ancien comportement**, pour que la correction ne puisse pas être défaite
    en silence.
-5. **Une ligne dans `docs/DEFAUTS.md`** : ce qui a révélé le défaut, et la commande qui vérifie
-   son état. Le détail chiffré va dans `docs/RESULTS.md` — commande, hash git, nombres.
+5. **Une ligne dans le registre des défauts** : ce qui a révélé le défaut, et la commande qui
+   vérifie son état. Le détail chiffré va dans le registre des résultats — commande, hash git,
+   nombres. La fiche du dépôt nomme ces deux fichiers.
 6. **Un commit par défaut**, dont le message porte la mesure.
 
 Correction impossible ou risquée → **rapport seul**, avec la mesure et la raison de ne pas
@@ -211,7 +211,8 @@ qui est ouverte jusqu'à ce que USER réponde.
 - Présenter une hypothèse comme un résultat.
 - Ajuster un seuil de test pour faire passer une suite, sans remesurer et consigner les deux
   valeurs.
-- Écrire un défaut ou une mesure dans `PLAN_PREPRINT.md`.
+- Consigner un défaut ou une mesure ailleurs que dans les registres que la fiche désigne.
+- Auditer un dépôt dont la fiche n'existe pas.
 
 ---
 
@@ -228,7 +229,9 @@ résultat, et cela évite de le relire deux fois.
 
 ## Étalonnage — ce qu'on peut en attendre
 
-Sur V1 (10 567 lignes, ~5 200 sur le chemin de décision) :
+Chiffres du premier audit mené par cette méthode, sur V1 de `BA_Proj` — 10 567 lignes, dont
+~5 200 sur le chemin de décision. Ils ne décrivent aucun autre dépôt ; ce sont les proportions
+qui se transportent, pas les totaux.
 
 | | |
 |---|---|
@@ -244,3 +247,5 @@ Deux chiffres à garder en tête. **La majorité du code était juste** : un age
 défaut par fonction se trompe, et un faux positif coûte plus cher qu'un défaut manqué —
 il envoie corriger du code correct. Et **la moitié des trouvailles vient d'une seule question** :
 c'est par là qu'il faut commencer.
+
+La fiche de chaque dépôt tient son propre étalonnage à mesure qu'il s'audite.

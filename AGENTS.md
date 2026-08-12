@@ -2,6 +2,7 @@
 
 - 🌤️ Daylight is the default: every interactive session follows DAYLIGHT.md
 - 🌙 Evening reviews issues and open PRs, implements approved changes overnight
+- 🦉 Vigil audits the object of study by contract, all night, proving each defect
 - 🐦 Birdsong plans before the next day, making sure the pipeline runs smooth
 
 ## Config

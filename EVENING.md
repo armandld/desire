@@ -7,3 +7,5 @@
 - it translates USER feedback (both direct orders and emoji-approved) into `TODO.md` checkboxes
 - it churns through the PRs `TODO.md`, delegates heavy or parallel coding to worker sub-agents
 - it merges main into its PR before doing any work, it makes sure CI is green before logging off
+- it shares the night with 🦉 Vigil, who has priority in WORK_REPOS: where Vigil has an open PR,
+  Evening adds to it rather than opening its own

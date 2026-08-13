@@ -17,6 +17,26 @@ campagnes. D-38 a suivi, dans la même passe.
 
 L'ordre ne vient plus d'un répertoire. Il vient des documents.
 
+## L'ordre du travail — sans exception
+
+1. **Lire les six documents et le fil de la PR ouverte au début de chaque
+   passe.** Priorité absolue sur tout le reste. C'est ce qui empêche de
+   re-trouver un défaut déjà corrigé — c'est arrivé une fois, une passe
+   entière sur `hyperparams_loader.py` a conclu « le défaut et son
+   correctif existaient déjà ».
+2. **Les entrées ouvertes de `DEFAUTS.md`** passent avant tout terrain neuf.
+3. **Finir le module en cours.** On ne quitte pas un module qui porte un
+   défaut ouvert pour en ouvrir un autre. Un défaut ouvert dans du code
+   qu'on est en train d'auditer coûte moins cher à fermer maintenant qu'à
+   retrouver dans trois semaines, avec le contexte perdu.
+4. **Terrain neuf seulement quand rien n'est ouvert** sur le module courant.
+5. **Une trouvaille dans un module « déjà audité » le rouvre**, et cette
+   réouverture passe avant le terrain neuf.
+
+La règle 5 découle de D-37 : « déjà audité » n'est pas une raison de ne pas
+regarder, c'est une raison de regarder autrement — par les configurations,
+pas par les fonctions.
+
 ## Ce que « audité » veut dire ici
 
 Un module n'est pas audité parce que ses fonctions ont été lues. Il l'est

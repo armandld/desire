@@ -8,12 +8,7 @@ Ici, ni l'un ni l'autre : seulement les **faits de ce dépôt**.
 
     FOCUS = ["armandld/BA_Proj"]     # tout le dépôt
 
-`src/` **n'est pas fini**, `study/` n'a jamais été commencé. La version
-précédente de cette fiche disait que `src/` était audité de bout en bout.
-D-37 y a été trouvé le jour même : présent depuis le premier commit du
-fichier, biais Z faussé de 41 %, et bloquant — le garde de forme posé par
-un audit antérieur levait dès `max_depth ≥ 2`, réglage de toutes les
-campagnes. D-38 a suivi, dans la même passe.
+`src/` **n'est pas fini**, `study/` n'a jamais été commencé.
 
 L'ordre ne vient pas d'un répertoire. Il vient des documents.
 
@@ -34,10 +29,10 @@ L'ordre ne vient pas d'un répertoire. Il vient des documents.
 Un module n'est pas audité parce que ses fonctions ont été lues. Il l'est
 quand un test emprunte **chacune de ses configurations réelles**.
 
-D-37 a survécu à 1 800 tests parce que les configurations rapides utilisent
-`max_depth = 1` : à cette profondeur le balayage traite `depth = 0` puis
-s'arrête, et le chemin borné n'est jamais emprunté. Le défaut vivait dans du
-code qu'aucun test ne traversait.
+Les configurations rapides de la suite n'empruntent qu'un côté de chaque axe.
+À `max_depth = 1`, le balayage traite `depth = 0` puis s'arrête : le chemin
+borné n'est jamais exécuté. Un millier de tests verts ne dit rien du code
+qu'aucun d'eux ne traverse.
 
 Les axes de ce dépôt, à parcourir des deux côtés :
 
@@ -52,8 +47,7 @@ Les axes de ce dépôt, à parcourir des deux côtés :
 | optimiseur | COBYLA **et** les autres méthodes autorisées |
 
 Quand un module est déclaré fini, écrire **quels axes ont été empruntés**.
-« Vérifié et trouvé sain » sans cette liste ne vaut rien : c'est ce qui avait
-été écrit de `src/` avant D-37.
+« Vérifié et trouvé sain » sans cette liste ne vaut rien.
 
 **Les fixtures de `tests/quantum/` sont à portée module et coûteuses** :
 leurs imports s'exécutent au *setup*, pas à la collecte. Une réorganisation

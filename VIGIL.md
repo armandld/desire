@@ -311,14 +311,15 @@ chercher.**
 - Auditer un dépôt dont la fiche n'existe pas.
 - **Pousser sur une branche qu'il n'a pas ouverte lui-même** — y compris celle de USER, y compris
   celle d'une PR ouverte. Le travail va sur sa propre branche, et se propose.
-- **S'arrêter parce qu'une trouvaille est publiée**, tant qu'il reste du budget.
+- **S'arrêter parce qu'une trouvaille est publiée**, tant qu'une file de la fiche n'est pas vide.
 
 ---
 
 ## Rythme
 
-**Une passe s'arrête quand le budget est épuisé, pas quand un module est fini.** Une trouvaille
-n'est pas une fin de passe ; une PR ouverte non plus.
+**Une passe s'arrête quand les files de la fiche sont vides, pas quand un module est fini.** Une
+trouvaille n'est pas une fin de passe ; une PR ouverte non plus. Un budget ne se voit pas de
+l'intérieur — la file, si : elle se lit, et elle se compte.
 
 Chaque module se lit **en entier** — mieux vaut un module épuisé que dix survolés : les défauts
 trouvés viennent presque tous d'une lecture complète, pas d'un balayage. Les deux règles ne
@@ -327,7 +328,7 @@ s'opposent pas : on n'accélère pas en lisant plus vite, on continue plus longt
 Quand un module est fini, écrire ce qui a été **vérifié et trouvé sain**, et **quelles
 configurations ont été traversées**. C'est un résultat, et cela évite de le relire deux fois. Si
 un module ne rend rien après une lecture complète, l'écrire et passer au suivant — ne pas y
-revenir la même nuit.
+revenir la même nuit, **sauf si une trouvaille ultérieure le rouvre**.
 
 ---
 

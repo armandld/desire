@@ -29,10 +29,10 @@ L'ordre ne vient pas d'un répertoire. Il vient des documents.
 Un module n'est pas audité parce que ses fonctions ont été lues. Il l'est
 quand un test emprunte **chacune de ses configurations réelles**.
 
-D-37 a survécu à 1 800 tests parce que les configurations rapides utilisent
-`max_depth = 1` : à cette profondeur le balayage traite `depth = 0` puis
-s'arrête, et le chemin borné n'est jamais emprunté. Le défaut vivait dans du
-code qu'aucun test ne traversait.
+Les configurations rapides de la suite n'empruntent qu'un côté de chaque axe.
+À `max_depth = 1`, le balayage traite `depth = 0` puis s'arrête : le chemin
+borné n'est jamais exécuté. Un millier de tests verts ne dit rien du code
+qu'aucun d'eux ne traverse.
 
 Les axes de ce dépôt, à parcourir des deux côtés :
 

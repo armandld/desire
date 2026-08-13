@@ -4,23 +4,44 @@ Ce qui est vrai en permanence de `armandld/BA_Proj`. L'état du jour est
 dans le dernier commentaire de la PR ouverte — ici, rien qui change d'une
 semaine à l'autre.
 
-## FOCUS
+## Périmètre
 
-    FOCUS = ["armandld/BA_Proj:study/"]
+    FOCUS = ["armandld/BA_Proj"]     # tout le dépôt
 
-`src/` a été audité par contrat de bout en bout : 36 défauts trouvés, 34
-corrigés, chacun mesuré avant/après et verrouillé par un test. Le rester
-d'y revenir est de re-trouver ce qui est déjà corrigé — c'est arrivé le
-12 août : une passe entière sur `hyperparams_loader.py` a conclu « le
-défaut et son correctif existaient déjà ».
+`src/` **n'est pas fini**, `study/` n'a jamais été commencé. La version
+précédente de cette fiche disait que `src/` était audité de bout en bout.
+D-37 y a été trouvé le jour même : présent depuis le premier commit du
+fichier, biais Z faussé de 41 %, et bloquant — le garde de forme posé par
+un audit antérieur levait dès `max_depth ≥ 2`, réglage de toutes les
+campagnes. D-38 a suivi, dans la même passe.
 
-`study/` n'a **jamais** été audité par contrat. C'est là qu'est le travail.
-Ordre par risque décroissant : `pipeline/`, `h3_representation/`,
-`h0_selection/` + `closed_loop/`, `h2b_prediction/` + `h4_transfer/`,
-`common/`.
+L'ordre ne vient plus d'un répertoire. Il vient des documents.
 
-Toucher à `src/` reste permis quand `study/` en révèle un défaut — mais on
-n'y va pas *chercher*.
+## Ce que « audité » veut dire ici
+
+Un module n'est pas audité parce que ses fonctions ont été lues. Il l'est
+quand un test emprunte **chacune de ses configurations réelles**.
+
+D-37 a survécu à 1 800 tests parce que les configurations rapides utilisent
+`max_depth = 1` : à cette profondeur le balayage traite `depth = 0` puis
+s'arrête, et le chemin borné n'est jamais emprunté. Le défaut vivait dans
+du code qu'aucun test ne traversait.
+
+Les axes de ce dépôt, à parcourir des deux côtés :
+
+| axe | les deux valeurs |
+|---|---|
+| profondeur AMR | `depth = 0` **et** `depth > 0` |
+| bord du patch | périodique **et** borné — deux constructeurs d'Hamiltonien distincts |
+| bras | quantique **et** `classical_only` |
+| backend | `state_vector` **et** échantillonné |
+| warm start | absent **et** présent |
+| Hamiltonien | non nul **et** nul |
+| optimiseur | COBYLA **et** les autres méthodes autorisées |
+
+Écrire, quand un module est déclaré fini, **quels axes ont été empruntés**.
+« Vérifié et trouvé sain » sans cette liste ne vaut rien : c'est ce qui a
+été écrit de `src/` avant D-37.
 
 ## Numéros de défaut — à réserver avant d'écrire
 

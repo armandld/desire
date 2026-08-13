@@ -1,8 +1,8 @@
 # VIGIL_BA_Proj.md
 
-Ce qui est vrai en permanence de `armandld/BA_Proj`. L'état du jour est
-dans le dernier commentaire de la PR ouverte — ici, rien qui change d'une
-semaine à l'autre.
+Ce qui est vrai en permanence de `armandld/BA_Proj`. L'état du jour est dans
+le dernier commentaire de la PR ouverte ; la méthode est dans `VIGIL.md`.
+Ici, ni l'un ni l'autre : seulement les **faits de ce dépôt**.
 
 ## Périmètre
 
@@ -15,27 +15,19 @@ fichier, biais Z faussé de 41 %, et bloquant — le garde de forme posé par
 un audit antérieur levait dès `max_depth ≥ 2`, réglage de toutes les
 campagnes. D-38 a suivi, dans la même passe.
 
-L'ordre ne vient plus d'un répertoire. Il vient des documents.
+L'ordre ne vient pas d'un répertoire. Il vient des documents.
 
 ## L'ordre du travail — sans exception
 
 1. **Lire les six documents et le fil de la PR ouverte au début de chaque
-   passe.** Priorité absolue sur tout le reste. C'est ce qui empêche de
-   re-trouver un défaut déjà corrigé — c'est arrivé une fois, une passe
-   entière sur `hyperparams_loader.py` a conclu « le défaut et son
-   correctif existaient déjà ».
+   passe.** Priorité absolue sur tout le reste.
 2. **Les entrées ouvertes de `DEFAUTS.md`** passent avant tout terrain neuf.
 3. **Finir le module en cours.** On ne quitte pas un module qui porte un
-   défaut ouvert pour en ouvrir un autre. Un défaut ouvert dans du code
-   qu'on est en train d'auditer coûte moins cher à fermer maintenant qu'à
-   retrouver dans trois semaines, avec le contexte perdu.
+   défaut ouvert pour en ouvrir un autre : le fermer maintenant coûte moins
+   cher que le retrouver dans trois semaines, contexte perdu.
 4. **Terrain neuf seulement quand rien n'est ouvert** sur le module courant.
 5. **Une trouvaille dans un module « déjà audité » le rouvre**, et cette
    réouverture passe avant le terrain neuf.
-
-La règle 5 découle de D-37 : « déjà audité » n'est pas une raison de ne pas
-regarder, c'est une raison de regarder autrement — par les configurations,
-pas par les fonctions.
 
 ## Ce que « audité » veut dire ici
 
@@ -44,8 +36,8 @@ quand un test emprunte **chacune de ses configurations réelles**.
 
 D-37 a survécu à 1 800 tests parce que les configurations rapides utilisent
 `max_depth = 1` : à cette profondeur le balayage traite `depth = 0` puis
-s'arrête, et le chemin borné n'est jamais emprunté. Le défaut vivait dans
-du code qu'aucun test ne traversait.
+s'arrête, et le chemin borné n'est jamais emprunté. Le défaut vivait dans du
+code qu'aucun test ne traversait.
 
 Les axes de ce dépôt, à parcourir des deux côtés :
 
@@ -59,9 +51,15 @@ Les axes de ce dépôt, à parcourir des deux côtés :
 | Hamiltonien | non nul **et** nul |
 | optimiseur | COBYLA **et** les autres méthodes autorisées |
 
-Écrire, quand un module est déclaré fini, **quels axes ont été empruntés**.
-« Vérifié et trouvé sain » sans cette liste ne vaut rien : c'est ce qui a
+Quand un module est déclaré fini, écrire **quels axes ont été empruntés**.
+« Vérifié et trouvé sain » sans cette liste ne vaut rien : c'est ce qui avait
 été écrit de `src/` avant D-37.
+
+**Les fixtures de `tests/quantum/` sont à portée module et coûteuses** :
+leurs imports s'exécutent au *setup*, pas à la collecte. Une réorganisation
+de fichiers s'y vérifie en lançant la suite, jamais en la collectant — six
+tests sont morts deux commits durant sans qu'aucune collecte ne le signale.
+`tests/test_suite_integrity.py` couvre ce cas depuis.
 
 ## Numéros de défaut — à réserver avant d'écrire
 
@@ -84,12 +82,9 @@ jamais celui qui est déjà publié dans un commentaire de PR.
 
 ## Branches
 
-Ne jamais pousser sur une branche portant les commits de quelqu'un d'autre
-— y compris `claude/*` ouverte par USER ou par un autre agent. Ouvrir sa
-propre branche depuis la plus récente, et la proposer.
-
-Le travail de USER sur ce dépôt est en cours et rebasé souvent : un push
-sur sa branche le force à rebaser sur toi.
+Le travail de USER sur ce dépôt est en cours et rebasé souvent : un push sur
+sa branche le force à rebaser sur toi. Ouvrir sa propre branche depuis la
+plus récente, et la proposer.
 
 ## Les six documents — où écrire quoi
 
@@ -102,20 +97,15 @@ sur sa branche le force à rebaser sur toi.
 | `EVALUATION.md` | ce qui, dans RESULTS, est **exploitable** | de nouvelles mesures |
 | `CODE_REVIEW.md` | note de relecture | tout le reste |
 
-Un défaut corrigé sort de `DEFAUTS.md` et entre dans `RESULTS.md` : c'est
-un résultat, pas un blocage. Un défaut sans mesure est une suspicion ; un
-défaut sans commande de vérification n'entre nulle part.
+Un défaut corrigé sort de `DEFAUTS.md` et entre dans `RESULTS.md` : c'est un
+résultat, pas un blocage.
 
 **Les nombres de `docs/archive/` sont obsolètes.** Ne rien en citer.
 
-## Pièges propres à ce dépôt
+## Faits du dépôt
 
-**L'opérateur non assorti.** Une grandeur discrète n'a de valeur que
-relativement à l'opérateur qui la calcule. Mesurer la divergence d'un champ
-avec un stencil différent de celui qui l'a produit mesure l'écart entre
-deux opérateurs, pas le champ. **Cinq occurrences.** Une fois, un défaut de
-huit ordres est resté invisible ; une autre, une correction *correcte* a
-paru fausse (2,1e−05 au lieu de 1e−16).
+Ce ne sont pas des règles — ce sont des propriétés mesurées, qu'il faut
+connaître avant de conclure quoi que ce soit.
 
 **Deux mappeurs, non interchangeables.** La boucle fermée tourne sur
 `PhysicalMapper` (v1, entraîné, **dimensionnel**) ; `study/` sur
@@ -127,47 +117,52 @@ entrent pas). Tout verdict doit dire lequel l'a produit.
 un défaut ; `tests/study/test_no_private_curl_survives.py` fait échouer la
 suite dessus.
 
-**Le champ qui ne sépare pas.** Sur Taylor-Green, deux conventions de
-rotationnel *opposées* rendent la même enstrophie. Avant d'écrire un
-test : *sur quelle entrée les deux hypothèses divergent-elles ?*
+**Le bras QAOA n'est pas déterministe.** Dispersion 1,79e−1 à 3,61e−1 sur 45
+paires d'appels identiques ; auto-corrélation de rang médiane 0,933. Les
+**valeurs** bougent, le **classement** tient : une conclusion fondée sur un
+ordre est robuste, une conclusion fondée sur une valeur ne l'est pas.
 
-**Le balayage vide.** Un `pytest -k` dont le motif ne correspond à rien
-sort en vert. Vérifier le **nombre de tests sélectionnés**, pas le code de
-retour. Trois commandes sur vingt-deux d'un registre ne sélectionnaient
-rien — dans le fichier même censé détecter ce piège.
+**`g_strain + g_rot ≡ 1`** par identité algébrique : les termes ZZ et ZZZZ
+partitionnent un unique scalaire d'Okubo-Weiss. Ce ne sont pas deux
+détecteurs indépendants, et `kappa` ne pilote qu'un degré de liberté.
 
-**Le seuil périmé.** Un test calibré sur la mesure du jour cesse de mesurer
-au premier changement légitime. Il ne s'actualise pas : il se **remesure**,
-ancienne et nouvelle valeur écrites. Si la grandeur s'avère non
-reproductible, changer de **grandeur**, pas de seuil.
-
-**Le test qui lit une chaîne de caractères.** Chercher
-`'HyperParams["gamma_hydro"] = 2.0'` dans un source teste la mise en forme,
-pas le comportement. Deux tests de ce type ont cassé sur un changement
-voulu. Interroger le module, pas son texte.
-
-**Le bras QAOA n'est pas déterministe.** Dispersion 1,79e−1 à 3,61e−1 sur
-45 paires d'appels identiques ; auto-corrélation de rang médiane 0,933. Les
-**valeurs** bougent, le **classement** tient. Avant de conclure sur un
-écart : mesurer la variance de la mesure elle-même. Deux estimations du même
-contraste ont différé d'un facteur 3,5.
-
-**Retirer une couche révèle ce qu'elle cachait.** D-26 et D-27 n'ont été
-vus qu'en cessant de projeter B. Aucune des quatre questions ne les aurait
-trouvés.
+**La couche de coût du QAOA est diagonale** : γ seul ne déplace aucune
+probabilité de mesure (4,4e−16). Seul le mixeur agit, borné à
+`π/(4·reps) = 0,393 rad`.
 
 ## Ce qu'on ne corrige pas
 
-`study/pipeline/dns_validation.py` est gelé : ses artefacts sont publiés.
-Les versions corrigées vivent dans `dns_extension`. Une correction y a déjà
-été annulée après qu'un test a rappelé la décision.
+`study/pipeline/dns_validation.py` est gelé : ses artefacts sont publiés. Les
+versions corrigées vivent dans `dns_extension`. Une correction y a déjà été
+annulée après qu'un test a rappelé la décision.
+
+## Les pièges de `VIGIL.md`, tels qu'ils se sont produits ici
+
+La règle est dans `VIGIL.md` ; voici où elle a mordu, avec ses nombres. Ces
+instances valent avertissement : elles se reproduiront dans `study/`.
+
+| règle | l'instance ici |
+|---|---|
+| opérateur assorti | la divergence de B mesurée au spectral : 9,5e−02, indistinguable du bruit ; mesurée au FD4 du second membre : **4,63e−07 contre 1,00e−14**, huit ordres |
+| … et contre soi | une perturbation dérivée analytiquement paraissait fausse à 2,1e−05 — c'était la **mesure** qui l'était, pas la correction |
+| champ qui ne sépare pas | Taylor-Green : deux conventions de rotationnel **opposées** rendent la même enstrophie |
+| balayage vide | 3 commandes sur 22 d'un registre ne sélectionnaient aucun test — dans le fichier censé détecter ce piège |
+| seuil périmé | un contraste asserti à 2σ variait d'un facteur **3,5** entre deux exécutions ; le test a été déplacé sur le coefficient de plaquette, déterministe (0,0553 → 1,2545, ×22,7) |
+| test qui lit le source | trois tests cassés par des changements **voulus**, sans qu'aucun défaut n'existe |
+| test qui vérifie que l'appel passe | `assert len(params) == 4` passait alors que Powell avait perdu la borne sur son mixeur |
+| avertissement invisible | `Method Powell cannot handle constraints`, sur stderr, noyé dans des centaines d'essais |
+| transformation deux fois | `_resize_padded_maxpool` ajoute le halo, l'appelant le redemandait : `(6,6)` contre `(4,4)`, deux moitiés d'Hamiltonien sur deux grilles — D-37 |
+| retirer une couche | D-26 et D-27 n'ont été vus qu'en **cessant** de projeter B ; aucune des quatre questions ne les aurait trouvés |
 
 ## Étalonnage
 
-Sur ~10 500 lignes de `src/` : 36 défauts, et 164 des 180 nombres publiés
-inchangés. **La majorité du code est juste.** Un rapport d'un défaut par
-fonction se trompe — un faux positif coûte plus cher qu'un défaut manqué,
-parce qu'il envoie corriger du code correct.
+Sur ~10 500 lignes de `src/` : **38 défauts**, dont **2 trouvés dans du code
+déjà déclaré audité**, dont **1 présent depuis le premier commit et
+bloquant**. Et 164 des 180 nombres publiés inchangés.
+
+**La majorité du code est juste.** Un rapport d'un défaut par fonction se
+trompe — un faux positif coûte plus cher qu'un défaut manqué, parce qu'il
+envoie corriger du code correct.
 
 Quand le doute porte sur défaut *contre* choix de conception : mesurer,
 documenter, **ne pas corriger**, demander.

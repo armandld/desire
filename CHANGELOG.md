@@ -2,6 +2,21 @@
 
 What landed on `main`, newest first — when each rule started binding, and what it replaced.
 
+## 2026-08-13
+
+**The stop condition becomes one the agent can observe**
+([#28](https://github.com/armandld/desire/pull/28)) — yesterday's *une passe s'arrête quand le
+budget est épuisé* was unactionable: an agent sees no token counter and no session clock, so it
+read the rule as *work a good while* and stopped after twenty-five minutes with one finding. The
+condition is now the card's queues, which can be read and counted. Replaces the budget wording
+from [#26](https://github.com/armandld/desire/pull/26), which had itself replaced *une passe =
+un module*.
+
+**A finding reopens a module the same night.** `## Rythme` said not to return to a module that
+yielded nothing, while the card says a finding in an already-audited module reopens it ahead of
+new ground. Distinct cases in principle, but an agent finding a defect in a module it had just
+declared sound had two rules pointing opposite ways. Rythme now carries the exception.
+
 ## 2026-08-12
 
 **A pass ends when the budget does, not when a module does**

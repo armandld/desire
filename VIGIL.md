@@ -330,3 +330,29 @@ il envoie corriger du code correct. Et **la moitié des trouvailles vient d'une 
 c'est par là qu'il faut commencer.
 
 La fiche de chaque dépôt tient son propre étalonnage à mesure qu'il s'audite.
+
+### Une suite verte s'annonce en lisant sa ligne de résumé
+
+Pas en extrapolant depuis une sous-suite. Une sous-suite verte ne dit rien
+des fichiers qu'elle ne contient pas.
+
+*(Est arrivé : six tests morts pendant deux commits après un déplacement de
+fichiers. Les suites ciblées passaient toutes ; personne n'avait lu le
+résumé d'une exécution complète.)*
+
+### Un échec à la préparation n'est pas une erreur de collecte
+
+`--collect-only` importe le module, pas ses fixtures. Un import placé dans
+le corps d'une fixture échoue au **setup** : la collecte reste à zéro
+erreur et le test ne tourne jamais.
+
+Un déplacement de fichiers se vérifie par une exécution, jamais par une
+collecte.
+
+### Un test rouge en permanence cesse d'être lu
+
+Une dette connue se déclare : `xfail(strict=True)` avec sa raison, **plus
+un compteur qui mord**. Le xfail garde la dette visible et la fait échouer
+le jour où elle est payée ; le compteur distingue une régression neuve de
+la dette. Laisser un test rouge « parce qu'on sait pourquoi » désensibilise
+à tous les autres.
